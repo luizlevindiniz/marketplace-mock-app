@@ -7,6 +7,10 @@ const ResetStyle = createGlobalStyle`
 *::before {
   box-sizing: border-box;
 }
+html{
+  margin: 0;
+  padding: 0;
+}
 
 body {
   font-size: 16px;
@@ -22,6 +26,26 @@ a {
     color: inherit;
     text-decoration: none;
 }
+
+h1,
+h2,
+h3,
+h4,
+h5,
+p,
+span{
+margin:0;
+padding:0;
+}
+
+ul,
+li {
+  text-decoration:none;
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
 
 `
 

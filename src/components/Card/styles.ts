@@ -14,6 +14,13 @@ export const WrapperBody = styled.div`
     .product-title {
         font-size: 1.25em;
         font-weight: 700;
+        cursor: pointer;
+        border: none;
+        outline: none;
+        background-color: transparent;
+        padding: 0;
+        margin: 0;
+        font-family: inherit;
     }
 
     .product-brand {

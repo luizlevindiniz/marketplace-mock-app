@@ -1,5 +1,5 @@
 import axios from "axios"
-import { ProductsResponse } from "models/Product"
+import { ProductObject, ProductsResponse } from "models/Product"
 
 const baseUrl = "https://dummyjson.com/products"
 
@@ -8,7 +8,7 @@ const getAllProducts = async (): Promise<ProductsResponse> => {
     return response.data
 }
 
-const getSingleProduct = async (id: string): Promise<ProductsResponse> => {
+const getSingleProduct = async (id: string): Promise<ProductObject> => {
     const url = `${baseUrl}/${id}`
 
     const response = await axios.get(url)

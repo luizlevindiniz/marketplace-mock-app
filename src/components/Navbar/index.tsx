@@ -2,11 +2,16 @@ import { ChangeEvent, ReactElement } from "react"
 import * as Styled from "./styles"
 
 interface Props {
-    search: string
-    handleSearchChange: (e: ChangeEvent<HTMLInputElement>) => void
+    search?: string
+    handleSearchChange?: (e: ChangeEvent<HTMLInputElement>) => void
+    displayNavbar: boolean
 }
 
-const Navbar = ({ search, handleSearchChange }: Props): ReactElement => {
+const Navbar = ({
+    search,
+    handleSearchChange,
+    displayNavbar,
+}: Props): ReactElement => {
     return (
         <Styled.PageHeader>
             <Styled.NavbarContent className="navbar-content">
@@ -18,20 +23,22 @@ const Navbar = ({ search, handleSearchChange }: Props): ReactElement => {
                         <a href="/">Marketplace</a>
                     </h2>
                 </Styled.NavbarHeader>
-                <Styled.SearchBarWrapper className="search-bar-wrapper">
-                    <input
-                        type="text"
-                        className="search-bar-input"
-                        placeholder="Search"
-                        value={search}
-                        onChange={handleSearchChange}
-                    />
-                    <div className="search-button-sprite">
-                        <button type="button">
-                            <i className="fa-solid fa-magnifying-glass"></i>
-                        </button>
-                    </div>
-                </Styled.SearchBarWrapper>
+                {displayNavbar && (
+                    <Styled.SearchBarWrapper className="search-bar-wrapper">
+                        <input
+                            type="text"
+                            className="search-bar-input"
+                            placeholder="Search"
+                            value={search}
+                            onChange={handleSearchChange}
+                        />
+                        <div className="search-button-sprite">
+                            <button type="button">
+                                <i className="fa-solid fa-magnifying-glass"></i>
+                            </button>
+                        </div>
+                    </Styled.SearchBarWrapper>
+                )}
                 <Styled.NavbarItems className="navbar-items">
                     <Styled.FlexDiv as="ul">
                         <li>

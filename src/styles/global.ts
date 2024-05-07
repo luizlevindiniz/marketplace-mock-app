@@ -19,7 +19,8 @@ body {
   font-family: "Poppins", sans-serif;
   font-weight: 400;
   font-style: normal;
-  background-color:${theme.colors.default}
+  background-color:${theme.colors.default};
+  color: ${theme.colors.primary};
 }
 
 a {

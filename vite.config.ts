@@ -20,6 +20,8 @@ export default defineConfig({
             styles: `${__dirname}/src/styles/`,
             types: `${__dirname}/src/types/`,
             utils: `${__dirname}/src/utils/`,
+            pages: `${__dirname}/src/pages/`,
+            services: `${__dirname}/src/services/`,
         },
     },
 })

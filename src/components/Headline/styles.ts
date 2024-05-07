@@ -13,4 +13,8 @@ export const Headline = styled.div`
         color: ${({ theme }) => theme.colors.secondary};
         text-align: center;
     }
+
+    h1 .product-name {
+        color: ${({ theme }) => theme.colors.primary};
+    }
 `

@@ -1,9 +1,11 @@
 import { ReactElement } from "react"
 import * as Styled from "./styles"
 import { Image } from "components/Image"
+import { Link } from "react-router-dom"
 import { FaStar } from "react-icons/fa"
 
 interface Card {
+    id: number
     title: string
     image: string
     imageAlt: string
@@ -17,17 +19,21 @@ const Card = ({
     title,
     image,
     imageAlt,
+    id,
     price,
     brand,
     rating,
     description,
 }: Card): ReactElement => {
     const starArray = Array(5).fill(0)
+
     return (
         <Styled.Wrapper className="product-card">
             <Image src={image} alt={imageAlt} width={200} height={200}></Image>
             <Styled.WrapperBody>
-                <h4 className="product-title">{title}</h4>
+                <Link className="product-title" to={`/product/${id}`}>
+                    {title}
+                </Link>
                 <h5 className="product-brand">{brand}</h5>
                 <p className="product-star-rating">
                     {starArray.map((_, index) => (

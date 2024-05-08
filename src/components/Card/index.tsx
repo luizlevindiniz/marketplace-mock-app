@@ -29,7 +29,14 @@ const Card = ({
 
     return (
         <Styled.Wrapper className="product-card">
-            <Image src={image} alt={imageAlt} width={200} height={200}></Image>
+            <Link className="product-image" to={`/product/${id}`}>
+                <Image
+                    src={image}
+                    alt={imageAlt}
+                    width={200}
+                    height={200}
+                ></Image>
+            </Link>
             <Styled.WrapperBody>
                 <Link className="product-title" to={`/product/${id}`}>
                     {title}

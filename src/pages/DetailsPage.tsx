@@ -7,9 +7,15 @@ import { ProductObject } from "models/Product"
 import { getSingleProduct } from "services/products"
 import { Showcase } from "components/Showcase"
 import { FaStar } from "react-icons/fa"
+import { Link } from "react-router-dom"
+import { useDispatch } from "react-redux"
+import { addToCart } from "reducers/cartReducer"
+import { ToastContainer, toast } from "react-toastify"
+import "react-toastify/dist/ReactToastify.css"
 
 const DetailsPage = (): ReactElement => {
     const { id } = useParams()
+    const dispatch = useDispatch()
 
     const [product, setProduct] = useState<ProductObject | null>(null)
     const [slide, setSlide] = useState(0)
@@ -20,6 +26,11 @@ const DetailsPage = (): ReactElement => {
         if (res) {
             setProduct(res)
         }
+    }
+
+    const handleAddToCartClick = (productToAdd: ProductObject): void => {
+        dispatch(addToCart(productToAdd))
+        toast("Item added to cart!")
     }
 
     const handleSlideChange = (command: string): void => {
@@ -40,6 +51,7 @@ const DetailsPage = (): ReactElement => {
         <>
             <Navbar displayNavbar={false} />
             <main className="products-wrapper">
+                <ToastContainer autoClose={3000} closeOnClick />
                 <Headline>
                     <h1>
                         Details:{" "}
@@ -51,6 +63,11 @@ const DetailsPage = (): ReactElement => {
                 {product ? (
                     <Showcase className="product-detail">
                         <div className="main">
+                            <Link to={"/"} className="back-link">
+                                <button type="button" className="back-button">
+                                    Back
+                                </button>
+                            </Link>
                             <div className="call">
                                 <div className="main-wrapper">
                                     <h3 className="main-header">
@@ -68,9 +85,8 @@ const DetailsPage = (): ReactElement => {
                                 </div>
                                 <div className="main-content">
                                     <div className="main-content__title">
-                                        {product.rating}
-                                        <FaStar></FaStar> - {product.stock}{" "}
-                                        units
+                                        {product.rating} <FaStar />-{" "}
+                                        {product.stock} units
                                     </div>
                                     <div className="main-content__subtitle">
                                         {product.description}
@@ -79,6 +95,9 @@ const DetailsPage = (): ReactElement => {
                                         <button
                                             type="button"
                                             className="add-to-cart-button"
+                                            onClick={() =>
+                                                handleAddToCartClick(product)
+                                            }
                                         >
                                             Add to Cart
                                         </button>

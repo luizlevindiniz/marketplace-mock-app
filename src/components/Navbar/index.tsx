@@ -1,6 +1,6 @@
 import { ChangeEvent, ReactElement } from "react"
 import * as Styled from "./styles"
-
+import { Link } from "react-router-dom"
 interface Props {
     search?: string
     handleSearchChange?: (e: ChangeEvent<HTMLInputElement>) => void
@@ -16,11 +16,11 @@ const Navbar = ({
         <Styled.PageHeader>
             <Styled.NavbarContent className="navbar-content">
                 <Styled.NavbarHeader className="navbar-head">
-                    <a href="/">
+                    <Link to="/">
                         <i className="fa-brands fa-shopware logo"></i>
-                    </a>
+                    </Link>
                     <h2 className="logo-title">
-                        <a href="/">Marketplace</a>
+                        <Link to="/">Marketplace</Link>
                     </h2>
                 </Styled.NavbarHeader>
                 {displayNavbar && (
@@ -42,29 +42,29 @@ const Navbar = ({
                 <Styled.NavbarItems className="navbar-items">
                     <Styled.FlexDiv as="ul">
                         <li>
-                            <a href="/" className="nav-link">
+                            <Link to="/" className="nav-link">
                                 Home
-                            </a>
+                            </Link>
                         </li>
                         <li>
-                            <a href="/" className="nav-link">
+                            <Link to="/" className="nav-link">
                                 Categories
-                            </a>
+                            </Link>
                         </li>
                         <li>
-                            <a href="/" className="nav-link">
+                            <Link to="/" className="nav-link">
                                 Wishlist
-                            </a>
+                            </Link>
                         </li>
                         <li>
-                            <a href="/" className="nav-link">
+                            <Link to="/cart" className="nav-link">
                                 <i className="fa-solid fa-cart-shopping"></i>
-                            </a>
+                            </Link>
                         </li>
                         <li>
-                            <a href="/" className="nav-link">
+                            <Link to="/" className="nav-link">
                                 <i className="fa-solid fa-user"></i>
-                            </a>
+                            </Link>
                         </li>
                     </Styled.FlexDiv>
                 </Styled.NavbarItems>

@@ -22,6 +22,7 @@ export default defineConfig({
             utils: `${__dirname}/src/utils/`,
             pages: `${__dirname}/src/pages/`,
             services: `${__dirname}/src/services/`,
+            reducers: `${__dirname}/src/reducers/`,
         },
     },
 })

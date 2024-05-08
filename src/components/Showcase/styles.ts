@@ -11,7 +11,7 @@ export const Showcase = styled.div`
     .call {
         display: flex;
         align-items: center;
-        justify-content: center;
+        justify-content: space-evenly;
         flex-direction: row;
     }
 
@@ -24,6 +24,7 @@ export const Showcase = styled.div`
     .slide-image {
         width: 100%;
         max-width: 800px;
+        max-height: 668px;
         border-radius: 4px;
     }
 
@@ -52,6 +53,25 @@ export const Showcase = styled.div`
         }
     }
 
+    .back-button {
+        border: 1px solid ${({ theme }) => theme.colors.primary};
+        border-radius: 50%;
+        width: 44px;
+        height: 44px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        transition: all 0.3s ease-out;
+        background-color: ${({ theme }) => theme.colors.comp};
+
+        &:hover {
+            background-color: ${({ theme }) => theme.colors.secondary};
+            color: ${({ theme }) => theme.colors.default};
+            text-decoration: none;
+        }
+    }
+
     .main {
         padding: 1rem 0 0 0;
 
@@ -65,15 +85,15 @@ export const Showcase = styled.div`
         &-title {
             font-size: 6rem;
             font-weight: 400;
-            margin-top: 10px;
+            margin-top: 7px;
             line-height: 1em;
         }
 
         &-subtitle {
             font-weight: 400;
             font-size: 2rem;
-            margin-top: 14px;
-            margin-bottom: 4rem;
+            margin-top: 1rem;
+            margin-bottom: 2rem;
         }
 
         &-content {
@@ -82,7 +102,7 @@ export const Showcase = styled.div`
             &__title {
                 font-size: 1.5rem;
                 font-style: italic;
-                margin-bottom: 1em;
+                margin-bottom: 0.7em;
             }
 
             &__subtitle {

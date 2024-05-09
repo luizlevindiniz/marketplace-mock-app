@@ -1,4 +1,4 @@
-import { ReactElement } from "react"
+import { ReactElement, useState } from "react"
 import { Navbar } from "components/Navbar"
 import { CartGrid } from "components/CartGrid"
 import { Footer } from "components/Footer"
@@ -7,12 +7,13 @@ import { CartShowcase } from "components/CartShowcase"
 import { CartProductObject } from "models/CartProduct"
 import { useSelector, useDispatch } from "react-redux"
 import { removeFromCart } from "reducers/cartReducer"
-
+import { CheckoutForm } from "components/CheckoutForm"
 interface CartState {
     cart: CartProductObject[]
 }
 
 const CartPage = (): ReactElement => {
+    const [showCheckout, setShowCheckout] = useState(false)
     const dispatch = useDispatch()
     const cart: CartProductObject[] = useSelector(
         (state: CartState) => state.cart
@@ -56,7 +57,10 @@ const CartPage = (): ReactElement => {
 
                                         <div className="product-tail">
                                             <div className="more-menu">
-                                                <h2>Qnt: 1 unit(s)</h2>
+                                                <h2>
+                                                    Qnt: {product.quantity}{" "}
+                                                    unit(s)
+                                                </h2>
                                                 <button
                                                     type="button"
                                                     className="remove-from-cart-button"
@@ -86,16 +90,21 @@ const CartPage = (): ReactElement => {
                             <span>
                                 $
                                 {cart.reduce(function (acc, prod) {
-                                    return acc + prod.price
+                                    return acc + prod.price * prod.quantity
                                 }, 0)}
                                 .00
                             </span>
                         </h2>
-                        <button type="button" className="cart-checkout-btn">
+                        <button
+                            type="button"
+                            className="cart-checkout-btn"
+                            onClick={() => setShowCheckout(!showCheckout)}
+                        >
                             Checkout
                         </button>
                     </div>
                 </CartGrid>
+                {showCheckout && <CheckoutForm />}
             </main>
             <Footer />
         </>

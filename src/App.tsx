@@ -27,9 +27,6 @@ const ProtectedRoute = ({ children }: { children: ReactNode }): ReactNode => {
 }
 
 function App(): ReactElement {
-    const a = useAuth()
-    console.log(a)
-
     return (
         <Router>
             <Provider store={store}>

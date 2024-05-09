@@ -1,6 +1,7 @@
-import { ChangeEvent, ReactElement } from "react"
+import { ChangeEvent, ReactElement, useEffect, useState } from "react"
 import * as Styled from "./styles"
 import { Link } from "react-router-dom"
+import { useAuth } from "auth/useAuth"
 interface Props {
     search?: string
     handleSearchChange?: (e: ChangeEvent<HTMLInputElement>) => void
@@ -12,6 +13,20 @@ const Navbar = ({
     handleSearchChange,
     displayNavbar,
 }: Props): ReactElement => {
+    const [isLoggedIn, setIsLoggedIn] = useState(false)
+    const auth = useAuth()
+
+    useEffect(() => {
+        if (auth.userLocalData) {
+            setIsLoggedIn(true)
+        }
+    }, [auth])
+
+    const handleLogout = (): void => {
+        setIsLoggedIn(false)
+        auth.logout()
+    }
+
     return (
         <Styled.PageHeader>
             <Styled.NavbarContent className="navbar-content">
@@ -62,9 +77,19 @@ const Navbar = ({
                             </Link>
                         </li>
                         <li>
-                            <Link to="/" className="nav-link">
-                                <i className="fa-solid fa-user"></i>
-                            </Link>
+                            {isLoggedIn ? (
+                                <button
+                                    onClick={handleLogout}
+                                    id="logged-in-btn"
+                                    className="nav-link"
+                                >
+                                    <i className="fa-solid fa-right-from-bracket"></i>
+                                </button>
+                            ) : (
+                                <Link to="/login" className="nav-link">
+                                    <i className="fa-solid fa-user"></i>
+                                </Link>
+                            )}
                         </li>
                     </Styled.FlexDiv>
                 </Styled.NavbarItems>

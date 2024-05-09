@@ -50,6 +50,17 @@ export const NavbarItems = styled.nav`
     li:hover {
         color: white;
     }
+
+    #logged-in-btn {
+        border: none;
+        background-color: transparent;
+        color: ${({ theme }) => theme.colors.default};
+    }
+
+    #logged-in-btn i {
+        width: 18px;
+        height: 20px;
+    }
 `
 
 export const SearchBarWrapper = styled(FlexDiv)`

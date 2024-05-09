@@ -12,6 +12,7 @@ import { useDispatch } from "react-redux"
 import { addToCart } from "reducers/cartReducer"
 import { ToastContainer, toast } from "react-toastify"
 import "react-toastify/dist/ReactToastify.css"
+import { CartProductObject } from "models/CartProduct"
 
 const DetailsPage = (): ReactElement => {
     const { id } = useParams()
@@ -29,8 +30,13 @@ const DetailsPage = (): ReactElement => {
     }
 
     const handleAddToCartClick = (productToAdd: ProductObject): void => {
-        dispatch(addToCart(productToAdd))
-        toast("Item added to cart!")
+        const productWithQuantity: CartProductObject = {
+            ...productToAdd,
+            quantity: 1,
+        }
+
+        dispatch(addToCart(productWithQuantity))
+        toast.success("Item added to cart!")
     }
 
     const handleSlideChange = (command: string): void => {

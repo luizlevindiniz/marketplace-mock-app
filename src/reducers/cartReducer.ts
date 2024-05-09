@@ -1,25 +1,25 @@
-import { ProductObject } from "models/Product"
+import { CartProductObject } from "models/CartProduct"
 import { UnknownAction } from "redux"
 interface Action {
     type: string
-    payload: ProductObject
+    payload: CartProductObject
 }
 interface CartState {
-    cart: ProductObject[]
+    cart: CartProductObject[]
 }
 
 const initialState: CartState = {
     cart: [],
 }
 
-export const addToCart = (product: ProductObject): UnknownAction => {
+export const addToCart = (product: CartProductObject): UnknownAction => {
     return {
         type: "ADD",
         payload: product,
     }
 }
 
-export const removeFromCart = (product: ProductObject): UnknownAction => {
+export const removeFromCart = (product: CartProductObject): UnknownAction => {
     return {
         type: "REMOVE",
         payload: product,
@@ -34,7 +34,7 @@ export const cartReducer = (
     switch (action.type) {
         case "ADD": {
             const alreadyExists = state.cart.find(
-                (p: ProductObject) => p.id === action.payload.id
+                (p: CartProductObject) => p.id === action.payload.id
             )
             console.log(alreadyExists)
 

@@ -23,6 +23,7 @@ export default defineConfig({
             pages: `${__dirname}/src/pages/`,
             services: `${__dirname}/src/services/`,
             reducers: `${__dirname}/src/reducers/`,
+            auth: `${__dirname}/src/auth/`,
         },
     },
 })

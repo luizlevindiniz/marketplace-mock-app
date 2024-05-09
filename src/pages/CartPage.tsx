@@ -4,16 +4,22 @@ import { CartGrid } from "components/CartGrid"
 import { Footer } from "components/Footer"
 import { Headline } from "components/Headline"
 import { CartShowcase } from "components/CartShowcase"
-import { ProductObject } from "models/Product"
+import { CartProductObject } from "models/CartProduct"
 import { useSelector, useDispatch } from "react-redux"
 import { removeFromCart } from "reducers/cartReducer"
 
+interface CartState {
+    cart: CartProductObject[]
+}
+
 const CartPage = (): ReactElement => {
     const dispatch = useDispatch()
-    const cart: ProductObject[] = useSelector((state: unknown) => state.cart)
+    const cart: CartProductObject[] = useSelector(
+        (state: CartState) => state.cart
+    )
 
     const handleRemoveFromCartClick = (
-        productToRemove: ProductObject
+        productToRemove: CartProductObject
     ): void => {
         dispatch(removeFromCart(productToRemove))
     }
@@ -32,7 +38,7 @@ const CartPage = (): ReactElement => {
                     <CartShowcase className="cart-showcase">
                         {cart.length !== 0 ? (
                             <div className="cart-products">
-                                {cart.map((product: ProductObject) => (
+                                {cart.map((product: CartProductObject) => (
                                     <div key={product.id} className="product">
                                         <div className="product-head">
                                             <div>

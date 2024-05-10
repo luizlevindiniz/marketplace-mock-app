@@ -13,6 +13,7 @@ import { addToCart } from "reducers/cartReducer"
 import { ToastContainer, toast } from "react-toastify"
 import "react-toastify/dist/ReactToastify.css"
 import { CartProductObject } from "models/CartProduct"
+import { Toast } from "components/Toast"
 
 const DetailsPage = (): ReactElement => {
     const { id } = useParams()
@@ -58,6 +59,7 @@ const DetailsPage = (): ReactElement => {
             <Navbar displayNavbar={false} />
             <main className="products-wrapper">
                 <ToastContainer autoClose={3000} closeOnClick />
+                <Toast message="te" type="failure" />
                 <Headline>
                     <h1>
                         Details:{" "}

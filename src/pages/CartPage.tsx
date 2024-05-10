@@ -1,4 +1,4 @@
-import { ReactElement, useState } from "react"
+import { ReactElement, useEffect, useState } from "react"
 import { Navbar } from "components/Navbar"
 import { CartGrid } from "components/CartGrid"
 import { Footer } from "components/Footer"
@@ -25,7 +25,12 @@ const CartPage = (): ReactElement => {
         productToRemove: CartProductObject
     ): void => {
         dispatch(removeFromCart(productToRemove))
+        cart.length === 0 && setShowCheckout(false)
     }
+
+    useEffect(() => {
+        cart.length === 0 && setShowCheckout(false)
+    }, [cart])
 
     return (
         <>

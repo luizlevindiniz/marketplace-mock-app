@@ -4,7 +4,7 @@ export const Footer = styled.footer`
     width: 100%;
     background-color: ${({ theme }) => theme.colors.primary};
     color: ${({ theme }) => theme.colors.default};
-
+    margin-top: auto;
     .footer-content {
         width: 100%;
         display: flex;

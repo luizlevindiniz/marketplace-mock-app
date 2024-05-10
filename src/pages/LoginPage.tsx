@@ -60,7 +60,7 @@ const LoginPage = (): ReactElement => {
             </div>
             <ToastContainer autoClose={3000} closeOnClick />
             <form onSubmit={handleLogin} className="auth-form">
-                <div>
+                <div className="auth-form-field">
                     <label htmlFor="username">Username: </label>
                     <input
                         id="username"
@@ -69,7 +69,7 @@ const LoginPage = (): ReactElement => {
                         onChange={(e) => setUsername(e.target.value)}
                     />
                 </div>
-                <div>
+                <div className="auth-form-field">
                     <label htmlFor="password">Password: </label>
                     <input
                         id="password"

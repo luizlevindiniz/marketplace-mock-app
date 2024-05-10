@@ -17,6 +17,13 @@ export const CenteredContainer = styled.div`
         font-family: inherit;
     }
 
+    .auth-form-field {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        width: 100%;
+    }
+
     .auth-form input {
         font-family: inherit;
         margin-bottom: 3px;

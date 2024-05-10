@@ -10,6 +10,13 @@ const ResetStyle = createGlobalStyle`
 html{
   margin: 0;
   padding: 0;
+  height:100%;
+}
+
+#root{
+  height:100%;
+  display: flex;
+  flex-direction: column;
 }
 
 body {
@@ -21,6 +28,7 @@ body {
   font-style: normal;
   background-color:${theme.colors.default};
   color: ${theme.colors.primary};
+  height:100%;
 }
 
 a {

@@ -56,7 +56,7 @@ const SignUpPage = (): ReactElement => {
             </div>
             <ToastContainer autoClose={3000} closeOnClick />
             <form onSubmit={handleSignUp} className="auth-form">
-                <div>
+                <div className="auth-form-field">
                     <label htmlFor="name">Full Name: </label>
                     <input
                         id="name"
@@ -65,7 +65,7 @@ const SignUpPage = (): ReactElement => {
                         onChange={(e) => setName(e.target.value)}
                     />
                 </div>
-                <div>
+                <div className="auth-form-field">
                     <label htmlFor="username">Username: </label>
                     <input
                         id="username"
@@ -74,7 +74,7 @@ const SignUpPage = (): ReactElement => {
                         onChange={(e) => setUsername(e.target.value)}
                     />
                 </div>
-                <div>
+                <div className="auth-form-field">
                     <label htmlFor="password">Password: </label>
                     <input
                         id="password"

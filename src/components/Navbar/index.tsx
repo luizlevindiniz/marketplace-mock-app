@@ -17,7 +17,7 @@ const Navbar = ({
     const auth = useAuth()
 
     useEffect(() => {
-        if (auth.userLocalData) {
+        if (auth.userToken) {
             setIsLoggedIn(true)
         }
     }, [auth])

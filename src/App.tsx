@@ -20,7 +20,7 @@ const store = createStore(cartReducer)
 
 const ProtectedRoute = ({ children }: { children: ReactNode }): ReactNode => {
     const auth = useAuth()
-    if (!auth.userLocalData) {
+    if (!auth.userToken) {
         return <Navigate to={"/login"} />
     }
     return children

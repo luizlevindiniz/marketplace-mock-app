@@ -9,19 +9,18 @@ import {
 import { useNavigate } from "react-router-dom"
 import { useLocalStorage } from "./useLocalStorage"
 
-interface UserAuthData {
-    username: string
-    password: string
+interface UserAuthToken {
+    token: string
 }
 
 interface AuthContextType {
-    userLocalData: UserAuthData | null | undefined
-    login: (data: UserAuthData) => Promise<void>
+    userToken: UserAuthToken | null | undefined
+    login: (token: UserAuthToken) => Promise<void>
     logout: () => void
 }
 
 const AuthContext = createContext<AuthContextType>({
-    userLocalData: null,
+    userToken: null,
     login: async () => {},
     logout: () => {},
 })
@@ -31,29 +30,28 @@ export const AuthProvider = ({
 }: {
     children: ReactNode
 }): ReactElement => {
-    const [userLocalData, setUserLocalData] = useLocalStorage("user", null)
+    const [userToken, setUserToken] = useLocalStorage("token", null)
     const navigate = useNavigate()
 
     const login = useCallback(
-        async (data: UserAuthData): Promise<void> => {
-            setUserLocalData(data)
-            navigate("/")
+        async (token: UserAuthToken): Promise<void> => {
+            setUserToken(token)
         },
-        [navigate, setUserLocalData]
+        [setUserToken]
     )
 
     const logout = useCallback((): void => {
-        setUserLocalData(null)
+        setUserToken(null)
         navigate("/", { replace: true })
-    }, [navigate, setUserLocalData])
+    }, [navigate, setUserToken])
 
     const value = useMemo(
         () => ({
-            userLocalData,
+            userToken,
             login,
             logout,
         }),
-        [userLocalData, login, logout]
+        [userToken, login, logout]
     )
     return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>
 }

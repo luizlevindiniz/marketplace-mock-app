@@ -3,28 +3,52 @@ import { ReactElement, FormEvent, useState } from "react"
 import { ToastContainer, toast } from "react-toastify"
 import "react-toastify/dist/ReactToastify.css"
 import { CenteredContainer } from "components/CenteredContainer"
-import { Link } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
 const LoginPage = (): ReactElement => {
     const [username, setUsername] = useState<string>("")
     const [password, setPassword] = useState<string>("")
     const auth = useAuth()
+    const navigate = useNavigate()
     const handleLogin = async (
         e: FormEvent<HTMLFormElement>
     ): Promise<void> => {
         e.preventDefault()
-
         try {
-            if (username === "user" && password === "password") {
-                await auth.login({ username, password })
-                toast.error("Logged in!")
-            } else {
-                toast.error("Wrong username or password!")
+            const payload = {
+                username,
+                password,
             }
+
+            const res = await fetch("http://localhost:8080/auth/login", {
+                body: JSON.stringify(payload),
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                method: "POST",
+            })
+
+            const resBody = await res.json()
+            if (!res.ok) {
+                toast.error(resBody.error)
+                return
+            }
+
+            const { token } = resBody
+            if (!token) {
+                throw new Error("Server Error! Token missing!")
+            }
+
+            await auth.login(token)
+            toast.success("Logged In! Redirect in a moment...")
+            setTimeout(() => {
+                navigate("/")
+            }, 3000)
         } catch (err) {
             console.log(err)
+            throw new Error("Error while signing up!")
         } finally {
-            setUsername("")
             setPassword("")
+            setUsername("")
         }
     }
 

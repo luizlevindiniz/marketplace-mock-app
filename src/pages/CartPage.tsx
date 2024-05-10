@@ -12,6 +12,8 @@ interface CartState {
     cart: CartProductObject[]
 }
 
+const isCartEmpty = (cart: CartProductObject[]): boolean => cart.length === 0
+
 const CartPage = (): ReactElement => {
     const [showCheckout, setShowCheckout] = useState(false)
     const dispatch = useDispatch()
@@ -95,13 +97,16 @@ const CartPage = (): ReactElement => {
                                 .00
                             </span>
                         </h2>
-                        <button
-                            type="button"
-                            className="cart-checkout-btn"
-                            onClick={() => setShowCheckout(!showCheckout)}
-                        >
-                            Checkout
-                        </button>
+
+                        {!isCartEmpty(cart) && (
+                            <button
+                                type="button"
+                                className="cart-checkout-btn"
+                                onClick={() => setShowCheckout(!showCheckout)}
+                            >
+                                Checkout
+                            </button>
+                        )}
                     </div>
                 </CartGrid>
                 {showCheckout && <CheckoutForm />}

@@ -1,20 +1,19 @@
 import { useState } from "react"
 
-interface UserAuthData {
-    username: string
-    password: string
+interface UserAuthToken {
+    token: string
 }
 
-function getLocalStorageItem(
-    keyName: string,
-    defaultValue?: UserAuthData | null
-): UserAuthData | null | undefined {
+function getTokenFromLocalStorage(
+    token: string,
+    defaultValue?: UserAuthToken | null
+): UserAuthToken | null | undefined {
     try {
-        const value = window.localStorage.getItem(keyName)
+        const value = window.localStorage.getItem(token)
         if (value) {
             return JSON.parse(value)
         } else {
-            window.localStorage.setItem(keyName, JSON.stringify(defaultValue))
+            window.localStorage.setItem(token, JSON.stringify(defaultValue))
             return defaultValue
         }
     } catch (err) {
@@ -24,16 +23,19 @@ function getLocalStorageItem(
 }
 
 export const useLocalStorage = (
-    keyName: string,
-    defaultValue?: UserAuthData | null
-): [UserAuthData | null | undefined, (value: UserAuthData | null) => void] => {
+    token: string,
+    defaultValue?: UserAuthToken | null
+): [
+    UserAuthToken | null | undefined,
+    (value: UserAuthToken | null) => void,
+] => {
     const [storedValue, setStoredValue] = useState(() =>
-        getLocalStorageItem(keyName, defaultValue)
+        getTokenFromLocalStorage(token, defaultValue)
     )
 
-    const setValue = (newValue: UserAuthData | null): void => {
+    const setValue = (newValue: UserAuthToken | null): void => {
         try {
-            window.localStorage.setItem(keyName, JSON.stringify(newValue))
+            window.localStorage.setItem(token, JSON.stringify(newValue))
         } catch (err) {
             console.log(err)
         }

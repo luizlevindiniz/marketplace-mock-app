@@ -29,15 +29,12 @@ const Card = ({
 
     return (
         <Styled.Wrapper className="product-card">
-            <Link className="product-image" to={`/product/${id}`}>
-                <Image
-                    src={image}
-                    alt={imageAlt}
-                    width={200}
-                    height={200}
-                ></Image>
-            </Link>
-            <Styled.WrapperBody>
+            <div className="product-image-wrapper">
+                <Link className="product-image" to={`/product/${id}`}>
+                    <Image src={image} alt={imageAlt}></Image>
+                </Link>
+            </div>
+            <Styled.WrapperBody className="product-body-wrapper">
                 <Link className="product-title" to={`/product/${id}`}>
                     {title}
                 </Link>

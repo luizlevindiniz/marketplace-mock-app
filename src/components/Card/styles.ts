@@ -5,6 +5,18 @@ export const Wrapper = styled.div`
     width: 100%;
     margin: 0 auto;
     height: 100%;
+
+    .product-image-wrapper {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: #ececec;
+        min-height: 200px;
+    }
+
+    .product-image {
+        max-height: 200px;
+    }
 `
 
 export const WrapperBody = styled.div`

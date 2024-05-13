@@ -1,7 +1,7 @@
 import styled from "styled-components"
 
 export const CartShowcase = styled.div`
-    max-width: 1200px;
+    max-width: 75rem;
     margin: 0 auto 3rem;
     border-radius: 4px;
     width: 100%;

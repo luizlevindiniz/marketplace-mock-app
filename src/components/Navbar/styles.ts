@@ -5,6 +5,10 @@ export const FlexDiv = styled.div`
     display: flex;
     align-items: center;
     padding: 0;
+
+    button {
+        cursor: pointer;
+    }
 `
 
 export const PageHeader = styled.header`
@@ -58,8 +62,8 @@ export const NavbarItems = styled.nav`
     }
 
     #logged-in-btn i {
-        width: 18px;
-        height: 20px;
+        width: 1.15rem;
+        height: 1.25rem;
     }
 `
 
@@ -71,7 +75,7 @@ export const SearchBarWrapper = styled(FlexDiv)`
         width: 100%;
         border: none;
         background: ${({ theme }) => theme.colors.default};
-        height: 25px;
+        height: 1.5rem;
         border-top-left-radius: 3px;
         border-bottom-left-radius: 3px;
     }
@@ -84,7 +88,7 @@ export const SearchBarWrapper = styled(FlexDiv)`
         background-color: ${({ theme }) => theme.colors.tertiary};
         color: ${({ theme }) => theme.colors.default};
         border: none;
-        height: 25px;
+        height: 1.5rem;
         border-top-right-radius: 3px;
         border-bottom-right-radius: 3px;
     }

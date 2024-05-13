@@ -1,12 +1,14 @@
 import styled from "styled-components"
 
 export const ToastWrapper = styled.div`
-    z-index: 10;
+    z-index: 1;
     display: flex;
-    float: right;
-    top: 0;
-    left: 0;
-    position: relative;
+    align-items: center;
+    justify-content: end;
+    flex-direction: column-reverse;
+    top: 4rem;
+    right: 1.5rem;
+    position: fixed;
 
     .icon {
         width: 1em;
@@ -29,6 +31,23 @@ export const ToastWrapper = styled.div`
         position: relative;
         color: hsl(25 10% 25%);
         opacity: 0.99;
+        animation: toastIt 3000ms cubic-bezier(0.785, 0.135, 0.15, 0.86)
+            forwards;
+
+        margin: 0.2rem 0;
+    }
+
+    @keyframes toastIt {
+        0%,
+        100% {
+            transform: translateY(-150%);
+            opacity: 0;
+        }
+        10%,
+        90% {
+            transform: translateY(0);
+            opacity: 1;
+        }
     }
 
     .toast:hover {

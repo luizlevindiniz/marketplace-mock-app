@@ -1,12 +1,21 @@
 import { ReactElement, useState, FormEvent } from "react"
-import { ToastContainer, toast } from "react-toastify"
-import "react-toastify/dist/ReactToastify.css"
 import { CenteredContainer } from "components/CenteredContainer"
 import { Link, useNavigate } from "react-router-dom"
+import { v4 } from "uuid"
+import Toast from "components/Toast"
+type ToastType = "success" | "failure" | "warning"
+
+interface ToastComponent {
+    toastMessage: string
+    toastType: ToastType
+    id: string
+}
+
 const SignUpPage = (): ReactElement => {
     const [name, setName] = useState<string>("")
     const [username, setUsername] = useState<string>("")
     const [password, setPassword] = useState<string>("")
+    const [toastList, setToastList] = useState<ToastComponent[]>([])
     const navigate = useNavigate()
 
     const handleSignUp = async (
@@ -31,10 +40,21 @@ const SignUpPage = (): ReactElement => {
 
             const resBody = await res.json()
             if (!res.ok) {
-                toast.error(resBody.error)
+                const errorToast: ToastComponent = {
+                    toastMessage: `${resBody.error}`,
+                    toastType: "failure",
+                    id: v4(),
+                }
+                setToastList(toastList.concat(errorToast))
                 return
             }
-            toast.success("User registered! Redirecting to login.")
+            const successToast: ToastComponent = {
+                toastMessage: "User registered! Redirecting to login.",
+                toastType: "success",
+                id: v4(),
+            }
+            setToastList(toastList.concat(successToast))
+
             setTimeout(() => {
                 navigate("/login")
             }, 3000)
@@ -54,7 +74,7 @@ const SignUpPage = (): ReactElement => {
                 <h1>Welcome to</h1>{" "}
                 <img src="./src/assets/online-shopping.png" alt="logo" />
             </div>
-            <ToastContainer autoClose={3000} closeOnClick />
+            <Toast toastList={toastList} setToastList={setToastList} />
             <form onSubmit={handleSignUp} className="auth-form">
                 <div className="auth-form-field">
                     <label htmlFor="name">Full Name: </label>

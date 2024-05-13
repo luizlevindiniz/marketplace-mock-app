@@ -6,7 +6,7 @@ export const CheckoutForm = styled.div`
 
     .container {
         background-color: ${({ theme }) => theme.colors.comp};
-        padding: 5px 20px 15px 20px;
+        padding: 0.35rem 1.25rem 1rem 1.25rem;
         border: 1px solid lightgrey;
         border-radius: 3px;
         margin-bottom: 2rem;
@@ -30,34 +30,34 @@ export const CheckoutForm = styled.div`
     }
 
     input[type="text"] {
-        margin-bottom: 20px;
-        padding: 12px;
+        margin-bottom: 1.25rem;
+        padding: 0.8rem;
         border: 1px solid #ccc;
         border-radius: 3px;
         width: 80%;
     }
 
     label {
-        margin-bottom: 10px;
+        margin-bottom: 0.7rem;
         display: block;
     }
 
     .icon-container {
-        margin-bottom: 20px;
-        padding: 7px 0;
-        font-size: 24px;
+        margin-bottom: 1.25rem;
+        padding: 0.45rem 0;
+        font-size: 1.5rem;
     }
 
     .buy-btn {
         background-color: #108f38;
         color: white;
-        padding: 12px;
-        margin: 10px 0;
+        padding: 0.75rem;
+        margin: 0.7rem 0;
         border: none;
         width: 80%;
         border-radius: 3px;
         cursor: pointer;
-        font-size: 17px;
+        font-size: 1.1rem;
         align-self: center;
         font-family: inherit;
     }

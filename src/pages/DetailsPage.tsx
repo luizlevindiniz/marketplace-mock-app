@@ -10,10 +10,18 @@ import { FaStar } from "react-icons/fa"
 import { Link } from "react-router-dom"
 import { useDispatch } from "react-redux"
 import { addToCart } from "reducers/cartReducer"
-import { ToastContainer, toast } from "react-toastify"
 import "react-toastify/dist/ReactToastify.css"
 import { CartProductObject } from "models/CartProduct"
-import { Toast } from "components/Toast"
+import Toast from "components/Toast"
+import { v4 } from "uuid"
+
+type ToastType = "success" | "failure" | "warning"
+
+interface ToastComponent {
+    toastMessage: string
+    toastType: ToastType
+    id: string
+}
 
 const DetailsPage = (): ReactElement => {
     const { id } = useParams()
@@ -21,6 +29,7 @@ const DetailsPage = (): ReactElement => {
 
     const [product, setProduct] = useState<ProductObject | null>(null)
     const [slide, setSlide] = useState(0)
+    const [toastList, setToastList] = useState<ToastComponent[]>([])
 
     const handleProduct = async (productId: string): Promise<void> => {
         const res = await getSingleProduct(productId)
@@ -37,7 +46,12 @@ const DetailsPage = (): ReactElement => {
         }
 
         dispatch(addToCart(productWithQuantity))
-        toast.success("Item added to cart!")
+        const addToCartToast: ToastComponent = {
+            toastMessage: `${productToAdd.title} added to cart!`,
+            toastType: "success",
+            id: v4(),
+        }
+        setToastList(toastList.concat(addToCartToast))
     }
 
     const handleSlideChange = (command: string): void => {
@@ -57,11 +71,13 @@ const DetailsPage = (): ReactElement => {
     return (
         <>
             <Navbar displayNavbar={false} />
-            <main className="products-wrapper">
-                <ToastContainer autoClose={3000} closeOnClick />
-                <Toast message="te" type="failure" />
+            <main
+                className="products-wrapper"
+                id="products-wrapper-detail-page"
+            >
+                <Toast toastList={toastList} setToastList={setToastList} />
                 <Headline>
-                    <h1>
+                    <h1 className="headline-details-page-h1">
                         Details:{" "}
                         <span className="product-name">
                             {product?.title ?? ""}
@@ -69,14 +85,14 @@ const DetailsPage = (): ReactElement => {
                     </h1>
                 </Headline>
                 {product ? (
-                    <Showcase className="product-detail">
+                    <Showcase className="product-detail" id="product-detail">
                         <div className="main">
                             <Link to={"/"} className="back-link">
                                 <button type="button" className="back-button">
                                     Back
                                 </button>
                             </Link>
-                            <div className="call">
+                            <div className="call" id="details-page-call">
                                 <div className="main-wrapper">
                                     <h3 className="main-header">
                                         {product.brand}

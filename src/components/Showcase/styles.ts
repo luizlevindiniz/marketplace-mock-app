@@ -31,8 +31,8 @@ export const Showcase = styled.div`
     .swiper-button {
         border: 1px solid ${({ theme }) => theme.colors.primary};
         border-radius: 50%;
-        width: 44px;
-        height: 44px;
+        width: 2.8rem;
+        height: 2.8rem;
         display: flex;
         align-items: center;
         justify-content: center;
@@ -56,8 +56,8 @@ export const Showcase = styled.div`
     .back-button {
         border: 1px solid ${({ theme }) => theme.colors.primary};
         border-radius: 50%;
-        width: 44px;
-        height: 44px;
+        width: 2.8rem;
+        height: 2.8rem;
         display: flex;
         align-items: center;
         justify-content: center;
@@ -120,9 +120,9 @@ export const Showcase = styled.div`
                 justify-content: end;
 
                 svg {
-                    width: 28px;
-                    height: 18px;
-                    margin-left: 10px;
+                    width: 1.75rem;
+                    height: 1.15rem;
+                    margin-left: 0.7rem;
                 }
             }
         }
@@ -130,7 +130,7 @@ export const Showcase = styled.div`
 
     .add-to-cart-button {
         border: 1px solid ${({ theme }) => theme.colors.primary};
-        border-radius: 28px;
+        border-radius: 1.75rem;
         background-color: ${({ theme }) => theme.colors.comp};
         color: ${({ theme }) => theme.colors.primary};
         font-size: 1rem;
@@ -163,7 +163,7 @@ export const Showcase = styled.div`
 
     .comments textarea {
         width: 71%;
-        height: 200px;
+        height: 14rem;
         border-radius: 4px;
     }
 
@@ -172,12 +172,12 @@ export const Showcase = styled.div`
         width: 71%;
         align-items: center;
         justify-content: end;
-        margin-top: 10px;
+        margin-top: 0.7rem;
     }
 
     .submit-wrapper button {
         border: 1px solid ${({ theme }) => theme.colors.primary};
-        border-radius: 28px;
+        border-radius: 1.75rem;
         background-color: ${({ theme }) => theme.colors.comp};
         color: ${({ theme }) => theme.colors.primary};
         font-size: 1rem;

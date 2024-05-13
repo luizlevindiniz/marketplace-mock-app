@@ -28,9 +28,9 @@ export const CartGrid = styled.div`
         -moz-border-radius: 28;
         border-radius: 28px;
         color: #ffffff;
-        font-size: 20px;
+        font-size: 1.25rem;
         background: #108f38;
-        padding: 10px 20px 10px 20px;
+        padding: 0.7rem 1.25rem 0.7rem 1.25rem;
         font-family: inherit;
         text-decoration: none;
         border: none;

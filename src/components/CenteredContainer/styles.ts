@@ -43,15 +43,15 @@ export const CenteredContainer = styled.div`
     }
 
     .auth-page-header img {
-        width: 50px;
-        margin-left: 10px;
+        width: 3rem;
+        margin-left: 0.65rem;
     }
 
     .auth-btn {
         border: 0.0125rem solid ${({ theme }) => theme.colors.primary};
         border-radius: 4px;
         width: 100%;
-        height: 35px;
+        height: 2.2rem;
         display: flex;
         font-size: 1rem;
         font-family: inherit;
@@ -61,7 +61,7 @@ export const CenteredContainer = styled.div`
         color: ${({ theme }) => theme.colors.default};
         transition: all 0.3s ease-out;
         background-color: ${({ theme }) => theme.colors.secondary};
-        margin: 10px 0 10px;
+        margin: 0.65rem 0 0.65rem;
 
         &:hover {
             background-color: ${({ theme }) => theme.colors.comp};

@@ -60,7 +60,7 @@ const HomePage = (): ReactElement => {
             />
             <main className="products-wrapper">
                 <Headline>
-                    <h1>Products</h1>
+                    <h1 className="headline-h1">Products</h1>
                 </Headline>
                 <Grid className="products-content">
                     {filteredProducts?.map((prod) => (

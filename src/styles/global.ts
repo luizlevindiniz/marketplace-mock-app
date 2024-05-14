@@ -8,16 +8,11 @@ const ResetStyle = createGlobalStyle`
   box-sizing: border-box;
 }
 html{
-  margin: 0;
-  padding: 0;
   height:100%;
+  margin:0;
+  padding:0;
 }
 
-#root{
-  height:100%;
-  display: flex;
-  flex-direction: column;
-}
 
 body {
   font-size: inherit;
@@ -29,6 +24,12 @@ body {
   background-color:${theme.colors.default};
   color: ${theme.colors.primary};
   height:100%;
+}
+
+#root{
+  display: flex;
+  flex-direction: column;
+  min-height: 100%;
 }
 
 a {
@@ -241,11 +242,30 @@ li {
   max-width:250px;
 }
 
-  
-
-
 }  
 
+
+@media screen and (max-width:400px){
+  .logo-title{
+    display: none;
+  }
+
+  .headline-details-page-h1{
+    font-size: 0.8em;
+  }
+  
+    #details-page-call .main-title{
+    font-size: 1.7rem;
+  }
+  
+  #products-wrapper-detail-page .product-detail{
+    max-width: 400px;
+  }
+
+  #products-wrapper-detail-page .slide-image{
+  max-width:175px;
+}
+}
 
 
 `

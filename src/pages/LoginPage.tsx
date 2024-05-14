@@ -1,6 +1,5 @@
 import { useAuth } from "auth/useAuth"
 import { ReactElement, FormEvent, useState } from "react"
-import "react-toastify/dist/ReactToastify.css"
 import { CenteredContainer } from "components/CenteredContainer"
 import { Link, useNavigate } from "react-router-dom"
 import Toast from "components/Toast"

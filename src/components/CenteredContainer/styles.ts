@@ -24,6 +24,10 @@ export const CenteredContainer = styled.div`
         width: 100%;
     }
 
+    .auth-form-field label {
+        margin: 0 0.3rem;
+    }
+
     .auth-form input {
         font-family: inherit;
         margin-bottom: 3px;

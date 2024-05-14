@@ -143,7 +143,7 @@ li {
 @media screen and (max-width:700px) {
 
   html  {
-  font-size: 10px;
+  font-size: 11px;
 }
 
 .products-content{
@@ -226,11 +226,16 @@ li {
   .navbar-items{
     padding: 0;
   }
+
+  .logo-title a{
+    font-size:1.1rem;
+  }
+
   .headline-details-page-h1{
     font-size: 1.1em;
   }
   
-    #details-page-call .main-title{
+  #details-page-call .main-title{
     font-size: 2.2rem;
   }
   
@@ -241,6 +246,19 @@ li {
   #products-wrapper-detail-page .slide-image{
   max-width:250px;
 }
+
+.footer-content .footer-list{
+  display: block;
+}
+
+.product .product-head .title{
+  font-size:1.4rem;
+}
+
+.product .product-head .price{
+  font-size:1.5rem;
+}
+
 
 }  
 

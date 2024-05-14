@@ -48,6 +48,10 @@ export const CheckoutForm = styled.div`
         font-size: 1.5rem;
     }
 
+    .icon-container i {
+        margin: 0 0.3rem;
+    }
+
     .buy-btn {
         background-color: #108f38;
         color: white;

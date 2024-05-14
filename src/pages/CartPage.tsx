@@ -6,7 +6,7 @@ import { Headline } from "components/Headline"
 import { CartShowcase } from "components/CartShowcase"
 import { CartProductObject } from "models/CartProduct"
 import { useSelector, useDispatch } from "react-redux"
-import { removeFromCart } from "reducers/cartReducer"
+import { removeFromCart, addToCart } from "reducers/cartReducer"
 import { CheckoutForm } from "components/CheckoutForm"
 interface CartState {
     cart: CartProductObject[]
@@ -26,6 +26,10 @@ const CartPage = (): ReactElement => {
     ): void => {
         dispatch(removeFromCart(productToRemove))
         cart.length === 0 && setShowCheckout(false)
+    }
+
+    const handleAddToCartClick = (productToAdd: CartProductObject): void => {
+        dispatch(addToCart(productToAdd))
     }
 
     useEffect(() => {
@@ -68,17 +72,30 @@ const CartPage = (): ReactElement => {
                                                     Qnt: {product.quantity}{" "}
                                                     unit(s)
                                                 </h2>
-                                                <button
-                                                    type="button"
-                                                    className="remove-from-cart-button"
-                                                    onClick={() =>
-                                                        handleRemoveFromCartClick(
-                                                            product
-                                                        )
-                                                    }
-                                                >
-                                                    <i className="fa-solid fa-xmark"></i>
-                                                </button>
+                                                <div className="more-menu-buttons">
+                                                    <button
+                                                        type="button"
+                                                        className="subtract-from-cart-button"
+                                                        onClick={() =>
+                                                            handleRemoveFromCartClick(
+                                                                product
+                                                            )
+                                                        }
+                                                    >
+                                                        <i className="fa-solid fa-minus"></i>
+                                                    </button>
+                                                    <button
+                                                        type="button"
+                                                        className="add-in-cart-button"
+                                                        onClick={() =>
+                                                            handleAddToCartClick(
+                                                                product
+                                                            )
+                                                        }
+                                                    >
+                                                        <i className="fa-solid fa-plus"></i>
+                                                    </button>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>

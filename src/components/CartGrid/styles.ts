@@ -49,13 +49,21 @@ export const CartGrid = styled.div`
         flex-direction: column;
     }
 
-    .remove-from-cart-button {
-        font-size: 2.3rem;
-        color: red;
+    .add-in-cart-button,
+    .subtract-from-cart-button {
+        font-size: 1.4rem;
         border: none;
         outline: none;
         background-color: transparent;
         cursor: pointer;
+    }
+
+    .add-in-cart-button {
+        color: green;
+    }
+
+    .subtract-from-cart-button {
+        color: red;
     }
 
     .total-price {

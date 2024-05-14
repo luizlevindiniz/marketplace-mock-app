@@ -1,69 +1,65 @@
-import Counter from "components/Counter"
-import { ReactElement, useEffect, useState } from "react"
-import { getAllProducts } from "./services/products"
+import { CartPage } from "pages/CartPage"
+import { DetailsPage } from "pages/DetailsPage"
+import { HomePage } from "pages/HomePage"
+import { LoginPage } from "pages/LoginPage"
+import { NotFoundPage } from "pages/NotFoundPage"
+import { SignUpPage } from "pages/SignUpPage"
+import { ReactElement, ReactNode } from "react"
+import {
+    BrowserRouter as Router,
+    Route,
+    Routes,
+    Navigate,
+} from "react-router-dom"
+import { cartReducer } from "reducers/cartReducer"
+import { createStore } from "redux"
+import { Provider } from "react-redux"
+import { useAuth, AuthProvider } from "auth/useAuth"
 
-interface ProductsResponse {
-    limit: number
-    total: number
-    skip: number
-    products: [ProductObject]
-}
+const store = createStore(cartReducer)
 
-interface ProductObject {
-    id: number
-    title: string
-    description: string
-    price: number
-    discountPercentage: number
-    rating: number
-    stock: number
-    brand: string
-    category: string
-    thumbnail: string
-    images: [string]
+const ProtectedRoute = ({ children }: { children: ReactNode }): ReactNode => {
+    const auth = useAuth()
+    if (!auth.userToken) {
+        return <Navigate to={"/login"} />
+    }
+    return children
 }
 
 function App(): ReactElement {
-    const [productsResponse, setProductsResponse] =
-        useState<ProductsResponse | null>(null)
-
-    const handleProducts = async () => {
-        const res = await getAllProducts()
-
-        setProductsResponse(res)
-    }
-
-    useEffect(() => {
-        handleProducts()
-    }, [])
-
-    if (!productsResponse) {
-        return (
-            <>
-                <h1>Products</h1>
-                <p> No products found =/ </p>
-            </>
-        )
-    }
-
-    const { products } = productsResponse
-
     return (
-        <>
-            <h1>Products</h1>
-            <p>Test</p>
-            <div className="products-wrapper">
-                <div className="products-content">
-                    {products.map((prod) => (
-                        <div className="product-card" key={prod.id}>
-                            <h4>{prod.title}</h4>
-                            <img src={prod.images[0]} alt="product" />
-                            <p>${prod.price}</p>
-                        </div>
-                    ))}
-                </div>
-            </div>
-        </>
+        <Router>
+            <Provider store={store}>
+                <AuthProvider>
+                    <Routes>
+                        <Route path="/" Component={HomePage} />
+                        <Route
+                            path="/cart"
+                            element={
+                                <ProtectedRoute>
+                                    <CartPage />
+                                </ProtectedRoute>
+                            }
+                        />
+                        <Route
+                            path="/product/:id"
+                            element={
+                                <ProtectedRoute>
+                                    <DetailsPage />
+                                </ProtectedRoute>
+                            }
+                        />
+                        <Route path="/login" Component={LoginPage} />
+                        <Route path="/signup" Component={SignUpPage} />
+                        <Route path="/404" Component={NotFoundPage} />
+                        <Route
+                            path="*"
+                            element={<Navigate replace to="/404" />}
+                        />
+                    </Routes>
+                </AuthProvider>
+            </Provider>
+        </Router>
     )
 }
 

@@ -1,7 +1,7 @@
 import { ReactElement } from "react"
-import { Navbar } from "components/Navbar"
-import { Footer } from "components/Footer"
-import { Headline } from "components/Headline"
+import { Navbar } from "@/components/Navbar"
+import { Footer } from "@/components/Footer"
+import { Headline } from "@/components/Headline"
 
 const NotFoundPage = (): ReactElement => {
     return (

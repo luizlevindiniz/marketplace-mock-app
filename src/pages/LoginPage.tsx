@@ -1,8 +1,8 @@
-import { useAuth } from "auth/useAuth"
+import { useAuth } from "@/auth/useAuth"
 import { ReactElement, FormEvent, useState } from "react"
-import { CenteredContainer } from "components/CenteredContainer"
+import { CenteredContainer } from "@/components/CenteredContainer"
 import { Link, useNavigate } from "react-router-dom"
-import Toast from "components/Toast"
+import Toast from "@/components/Toast"
 import { v4 } from "uuid"
 
 type ToastType = "success" | "failure" | "warning"

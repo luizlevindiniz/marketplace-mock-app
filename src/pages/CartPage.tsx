@@ -1,13 +1,13 @@
 import { ReactElement, useEffect, useState } from "react"
-import { Navbar } from "components/Navbar"
-import { CartGrid } from "components/CartGrid"
-import { Footer } from "components/Footer"
-import { Headline } from "components/Headline"
-import { CartShowcase } from "components/CartShowcase"
-import { CartProductObject } from "models/CartProduct"
+import { Navbar } from "@/components/Navbar"
+import { CartGrid } from "@/components/CartGrid"
+import { Footer } from "@/components/Footer"
+import { Headline } from "@/components/Headline"
+import { CartShowcase } from "@/components/CartShowcase"
+import { CartProductObject } from "@/models/CartProduct"
 import { useSelector, useDispatch } from "react-redux"
-import { removeFromCart, addToCart } from "reducers/cartReducer"
-import { CheckoutForm } from "components/CheckoutForm"
+import { removeFromCart, addToCart } from "@/reducers/cartReducer"
+import { CheckoutForm } from "@/components/CheckoutForm"
 interface CartState {
     cart: CartProductObject[]
 }

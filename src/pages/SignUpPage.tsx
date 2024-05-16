@@ -1,8 +1,8 @@
 import { ReactElement, useState, FormEvent } from "react"
-import { CenteredContainer } from "components/CenteredContainer"
+import { CenteredContainer } from "@/components/CenteredContainer"
 import { Link, useNavigate } from "react-router-dom"
 import { v4 } from "uuid"
-import Toast from "components/Toast"
+import Toast from "@/components/Toast"
 type ToastType = "success" | "failure" | "warning"
 
 interface ToastComponent {

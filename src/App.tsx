@@ -1,6 +1,6 @@
 import { CartPage } from "pages/CartPage"
 import { DetailsPage } from "pages/DetailsPage"
-import { HomePage } from "pages/HomePage"
+import { HomePage } from "pages/HomePage/HomePage"
 import { LoginPage } from "pages/LoginPage"
 import { NotFoundPage } from "pages/NotFoundPage"
 import { SignUpPage } from "pages/SignUpPage"

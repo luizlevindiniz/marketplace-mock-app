@@ -1,6 +1,6 @@
 import { ChangeEvent, ReactElement, useEffect, useState } from "react"
-import { getAllProducts } from "../services/products"
-import { Navbar } from "components/Navbar"
+import { getAllProducts } from "../../services/products"
+import { Navbar } from "../../components/Navbar/index"
 import { Grid } from "components/Grid"
 import { Card } from "components/Card"
 import { Footer } from "components/Footer"

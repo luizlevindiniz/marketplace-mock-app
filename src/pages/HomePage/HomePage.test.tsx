@@ -1,74 +1,119 @@
 import { HomePage } from "./HomePage"
-import { mount, shallow, ShallowWrapper } from "enzyme"
-import { expect, test, beforeEach } from "@jest/globals"
-import { ReactElement } from "react"
-import * as productsService from "../../services/products"
-jest.mock("../../services/products")
+import "@testing-library/jest-dom"
+import { act, render, screen } from "@testing-library/react"
+import * as services from "../../services/products"
+import { ResetStyle } from "@/styles/global"
+import { ThemeProvider } from "styled-components"
+import theme from "@/styles/theme"
+import { cartReducer } from "@/reducers/cartReducer"
+import { createStore } from "redux"
+import { Provider } from "react-redux"
+import { AuthProvider } from "@/auth/useAuth"
+import { BrowserRouter as Router } from "react-router-dom"
+const store = createStore(cartReducer)
+
+const resolved = {
+    products: [
+        {
+            id: 1,
+            title: "iPhone 9",
+            description: "An apple mobile which is nothing like apple",
+            price: 549,
+            discountPercentage: 12.96,
+            rating: 4.69,
+            stock: 94,
+            brand: "Apple",
+            category: "smartphones",
+            thumbnail:
+                "https://cdn.dummyjson.com/product-images/1/thumbnail.jpg",
+            images: [
+                "https://cdn.dummyjson.com/product-images/1/1.jpg",
+                "https://cdn.dummyjson.com/product-images/1/2.jpg",
+                "https://cdn.dummyjson.com/product-images/1/3.jpg",
+                "https://cdn.dummyjson.com/product-images/1/4.jpg",
+                "https://cdn.dummyjson.com/product-images/1/thumbnail.jpg",
+            ],
+        },
+    ],
+    total: 100,
+    skip: 0,
+    limit: 30,
+}
+
+const rejected = {
+    products: [],
+    total: 100,
+    skip: 0,
+    limit: 30,
+}
+
+const mockGetAllProducts = jest.spyOn(services, "getAllProducts")
+
 describe("src/pages/HomePage", () => {
     describe("when products API is offline, does the homepage ", () => {
-        let wrapper: ShallowWrapper<ReactElement>
-        beforeEach(() => {
-            wrapper = shallow(<HomePage />)
-        })
-        test("render the header", () => {
-            const header = wrapper.find({ "data-testid": "products-headline" })
-            expect(header.is("h1")).toBe(true)
-            expect(header).toBeDefined()
-            expect(header.text()).toBe("Products")
+        beforeEach(async () => {
+            await act(async () => {
+                mockGetAllProducts.mockResolvedValue(rejected)
+                render(
+                    <ThemeProvider theme={theme}>
+                        <ResetStyle />
+                        <Router>
+                            <Provider store={store}>
+                                <AuthProvider>
+                                    <HomePage />
+                                </AuthProvider>
+                            </Provider>
+                        </Router>
+                    </ThemeProvider>
+                )
+            })
         })
 
-        test("render the error paragraph", () => {
-            const paragraph = wrapper.find({
-                "data-testid": "not-found-paragraph",
-            })
-            expect(paragraph.is("p")).toBe(true)
+        afterEach(() => {
+            jest.clearAllMocks()
+        })
+        test("render the header", async () => {
+            const header = screen.getByTestId("products-headline")
+            expect(header.tagName).toBe("H1")
+            expect(header).toBeDefined()
+            expect(header.textContent).toBe("Products")
+        })
+
+        test("render the error paragraph", async () => {
+            const paragraph = screen.getByTestId("not-found-paragraph")
+            expect(paragraph.tagName).toBe("P")
             expect(paragraph).toBeDefined()
-            expect(paragraph.text()).toBe(" No products found =/ ")
+            expect(paragraph.textContent).toBe(" No products found =/ ")
         })
     })
 
     describe("when products API is online, does the homepage", () => {
         beforeEach(() => {
-            jest.spyOn(productsService, "getAllProducts").mockResolvedValueOnce(
-                {
-                    products: [
-                        {
-                            id: 1,
-                            title: "iPhone 9",
-                            description:
-                                "An apple mobile which is nothing like apple",
-                            price: 549,
-                            discountPercentage: 12.96,
-                            rating: 4.69,
-                            stock: 94,
-                            brand: "Apple",
-                            category: "smartphones",
-                            thumbnail:
-                                "https://cdn.dummyjson.com/product-images/1/thumbnail.jpg",
-                            images: [
-                                "https://cdn.dummyjson.com/product-images/1/1.jpg",
-                                "https://cdn.dummyjson.com/product-images/1/2.jpg",
-                                "https://cdn.dummyjson.com/product-images/1/3.jpg",
-                                "https://cdn.dummyjson.com/product-images/1/4.jpg",
-                                "https://cdn.dummyjson.com/product-images/1/thumbnail.jpg",
-                            ],
-                        },
-                    ],
-                    total: 100,
-                    skip: 0,
-                    limit: 30,
-                }
-            )
+            mockGetAllProducts.mockResolvedValue(resolved)
         })
+
         afterEach(() => {
             jest.clearAllMocks()
         })
         test("render all products", async () => {
-            expect(productsService.getAllProducts).toHaveBeenCalledTimes(0)
-            const wrapper = mount(<HomePage />)
-            expect(productsService.getAllProducts).toHaveBeenCalledTimes(1)
-            wrapper.update()
-            console.log(wrapper.debug())
+            expect(mockGetAllProducts).toHaveBeenCalledTimes(0)
+            await act(async () =>
+                render(
+                    <ThemeProvider theme={theme}>
+                        <ResetStyle />
+                        <Router>
+                            <Provider store={store}>
+                                <AuthProvider>
+                                    <HomePage />
+                                </AuthProvider>
+                            </Provider>
+                        </Router>
+                    </ThemeProvider>
+                )
+            )
+            expect(mockGetAllProducts).toHaveBeenCalledTimes(1)
+            await screen.findByText("Products")
+            await screen.findByText("iPhone 9")
         })
     })
 })

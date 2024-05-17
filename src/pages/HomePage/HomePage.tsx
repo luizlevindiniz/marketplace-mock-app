@@ -33,8 +33,10 @@ const HomePage = (): ReactElement => {
         const res = await getAllProducts()
 
         if (res.products) {
-            setProductsResponse(res)
-            setFilteredProducts(res.products)
+            if (res.products.length > 0) {
+                setProductsResponse(res)
+                setFilteredProducts(res.products)
+            }
         }
     }
 

@@ -1,9 +1,9 @@
-import { CartPage } from "pages/CartPage"
-import { DetailsPage } from "pages/DetailsPage"
-import { HomePage } from "pages/HomePage"
-import { LoginPage } from "pages/LoginPage"
-import { NotFoundPage } from "pages/NotFoundPage"
-import { SignUpPage } from "pages/SignUpPage"
+import { CartPage } from "./pages/CartPage"
+import { DetailsPage } from "./pages/DetailsPage"
+import { HomePage } from "./pages/HomePage/HomePage"
+import { LoginPage } from "./pages/LoginPage"
+import { NotFoundPage } from "./pages/NotFoundPage"
+import { SignUpPage } from "./pages/SignUpPage"
 import { ReactElement, ReactNode } from "react"
 import {
     BrowserRouter as Router,
@@ -11,10 +11,10 @@ import {
     Routes,
     Navigate,
 } from "react-router-dom"
-import { cartReducer } from "reducers/cartReducer"
+import { cartReducer } from "./reducers/cartReducer"
 import { createStore } from "redux"
 import { Provider } from "react-redux"
-import { useAuth, AuthProvider } from "auth/useAuth"
+import { useAuth, AuthProvider } from "./auth/useAuth"
 
 const store = createStore(cartReducer)
 

@@ -2,7 +2,7 @@ export interface ProductsResponse {
     limit: number
     total: number
     skip: number
-    products: [ProductObject]
+    products: ProductObject[]
 }
 
 export interface ProductObject {
@@ -16,5 +16,5 @@ export interface ProductObject {
     brand: string
     category: string
     thumbnail: string
-    images: [string]
+    images: string[]
 }

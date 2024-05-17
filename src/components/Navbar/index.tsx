@@ -1,7 +1,7 @@
 import { ChangeEvent, ReactElement, useEffect, useState } from "react"
 import * as Styled from "./styles"
 import { Link } from "react-router-dom"
-import { useAuth } from "auth/useAuth"
+import { useAuth } from "@/auth/useAuth"
 interface Props {
     search?: string
     handleSearchChange?: (e: ChangeEvent<HTMLInputElement>) => void

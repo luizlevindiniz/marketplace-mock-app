@@ -1,6 +1,6 @@
 import { ReactElement } from "react"
 import * as Styled from "./styles"
-import { Image } from "components/Image"
+import { Image } from "@/components/Image"
 import { Link } from "react-router-dom"
 import { FaStar } from "react-icons/fa"
 

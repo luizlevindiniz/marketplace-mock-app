@@ -1,11 +1,11 @@
 import { ChangeEvent, ReactElement, useEffect, useState } from "react"
-import { getAllProducts } from "../services/products"
-import { Navbar } from "components/Navbar"
-import { Grid } from "components/Grid"
-import { Card } from "components/Card"
-import { Footer } from "components/Footer"
-import { Headline } from "components/Headline"
-import { ProductObject, ProductsResponse } from "models/Product"
+import { getAllProducts } from "../../services/products"
+import { Navbar } from "@/components/Navbar"
+import { Grid } from "@/components/Grid"
+import { Card } from "@/components/Card"
+import { Footer } from "@/components/Footer"
+import { Headline } from "@/components/Headline"
+import { ProductObject, ProductsResponse } from "@/models/Product"
 
 const HomePage = (): ReactElement => {
     const [productsResponse, setProductsResponse] =
@@ -33,8 +33,10 @@ const HomePage = (): ReactElement => {
         const res = await getAllProducts()
 
         if (res.products) {
-            setProductsResponse(res)
-            setFilteredProducts(res.products)
+            if (res.products.length > 0) {
+                setProductsResponse(res)
+                setFilteredProducts(res.products)
+            }
         }
     }
 
@@ -45,8 +47,10 @@ const HomePage = (): ReactElement => {
     if (!productsResponse) {
         return (
             <>
-                <h1>Products</h1>
-                <p> No products found =/ </p>
+                <h1 className="headline-h1" data-testid="products-headline">
+                    Products
+                </h1>
+                <p data-testid="not-found-paragraph"> No products found =/ </p>
             </>
         )
     }
@@ -60,7 +64,9 @@ const HomePage = (): ReactElement => {
             />
             <main className="products-wrapper">
                 <Headline>
-                    <h1 className="headline-h1">Products</h1>
+                    <h1 className="headline-h1" data-testid="products-headline">
+                        Products
+                    </h1>
                 </Headline>
                 <Grid className="products-content">
                     {filteredProducts?.map((prod) => (

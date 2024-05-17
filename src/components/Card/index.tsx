@@ -35,7 +35,11 @@ const Card = ({
                 </Link>
             </div>
             <Styled.WrapperBody className="product-body-wrapper">
-                <Link className="product-title" to={`/product/${id}`}>
+                <Link
+                    className="product-title"
+                    to={`/product/${id}`}
+                    data-testid={"product-title"}
+                >
                     {title}
                 </Link>
                 <h5 className="product-brand">{brand}</h5>

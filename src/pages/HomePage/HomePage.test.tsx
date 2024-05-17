@@ -10,6 +10,7 @@ import { createStore } from "redux"
 import { Provider } from "react-redux"
 import { AuthProvider } from "@/auth/useAuth"
 import { BrowserRouter as Router } from "react-router-dom"
+
 const store = createStore(cartReducer)
 
 const resolved = {
@@ -114,6 +115,34 @@ describe("src/pages/HomePage", () => {
             expect(mockGetAllProducts).toHaveBeenCalledTimes(1)
             await screen.findByText("Products")
             await screen.findByText("iPhone 9")
+        })
+
+        test("access details page", async () => {
+            await act(async () =>
+                render(
+                    <ThemeProvider theme={theme}>
+                        <ResetStyle />
+                        <Router>
+                            <Provider store={store}>
+                                <AuthProvider>
+                                    <HomePage />
+                                </AuthProvider>
+                            </Provider>
+                        </Router>
+                    </ThemeProvider>
+                )
+            )
+            await screen.findByText("iPhone 9")
+            const button = await screen.findByTestId("product-title")
+            expect(button.tagName).toBe("A")
+
+            act(() => {
+                button.click()
+            })
+            expect(window.location.pathname).toBe("/product/1")
+            await screen.findByText(
+                "An apple mobile which is nothing like apple"
+            )
         })
     })
 })

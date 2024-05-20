@@ -44,6 +44,7 @@ const Navbar = ({
                             type="text"
                             className="search-bar-input"
                             placeholder="Search"
+                            data-testid="search-bar-input"
                             value={search}
                             onChange={handleSearchChange}
                         />

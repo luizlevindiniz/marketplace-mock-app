@@ -1,6 +1,6 @@
 import { HomePage } from "./HomePage"
 import "@testing-library/jest-dom"
-import { act, render, screen } from "@testing-library/react"
+import { act, render, screen, fireEvent } from "@testing-library/react"
 import * as services from "../../services/products"
 import { ResetStyle } from "@/styles/global"
 import { ThemeProvider } from "styled-components"
@@ -143,6 +143,30 @@ describe("src/pages/HomePage", () => {
             await screen.findByText(
                 "An apple mobile which is nothing like apple"
             )
+        })
+
+        test("check search bar functionality", async () => {
+            await act(async () =>
+                render(
+                    <ThemeProvider theme={theme}>
+                        <ResetStyle />
+                        <Router>
+                            <Provider store={store}>
+                                <AuthProvider>
+                                    <HomePage />
+                                </AuthProvider>
+                            </Provider>
+                        </Router>
+                    </ThemeProvider>
+                )
+            )
+
+            const searchBar = await screen.findByTestId("search-bar-input")
+            expect(searchBar.tagName).toBe("INPUT")
+            const iphoneText = screen.queryByText("iPhone 9")
+            expect(iphoneText).toBeInTheDocument()
+            fireEvent.change(searchBar, { target: { value: "ABCD" } })
+            expect(iphoneText).not.toBeInTheDocument()
         })
     })
 })

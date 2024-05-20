@@ -47,14 +47,22 @@ const ToastItem = ({
     onClose,
 }: ToastItemProps): ReactElement => {
     return (
-        <div className={`toast toast--${toastType}`} role="alert">
+        <div
+            className={`toast toast--${toastType}`}
+            role="alert"
+            data-testid="toast"
+        >
             <div className="toast-message">
                 {toastIcon && (
                     <div className="icon icon--lg icon--thumb">{toastIcon}</div>
                 )}
                 <p>{toastMessage}</p>
             </div>
-            <button className="toast-close-btn" onClick={() => onClose(id)}>
+            <button
+                className="toast-close-btn"
+                data-testid="toast-close-btn"
+                onClick={() => onClose(id)}
+            >
                 <span className="icon">
                     <CloseIcon />
                 </span>
@@ -95,7 +103,7 @@ const Toast = ({
     }, [deleteToast, toastList])
 
     return (
-        <Styled.ToastWrapper>
+        <Styled.ToastWrapper data-testid="toast-wrapper">
             {toastList.map((toast) => (
                 <ToastItem
                     toastIcon={getToastIcon(toast.toastType)}

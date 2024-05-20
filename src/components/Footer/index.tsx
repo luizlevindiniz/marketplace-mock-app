@@ -3,7 +3,7 @@ import * as Styled from "./styles"
 
 const Footer = (): ReactElement => {
     return (
-        <Styled.Footer>
+        <Styled.Footer data-testid="footer">
             <div className="footer-content">
                 <ul className="footer-list">
                     <li>

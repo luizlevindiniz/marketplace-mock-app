@@ -72,7 +72,11 @@ const SignUpPage = (): ReactElement => {
         <CenteredContainer>
             <div className="auth-page-header">
                 <h1>Welcome to</h1>{" "}
-                <img src="./src/assets/online-shopping.png" alt="logo" />
+                <img
+                    src="./src/assets/online-shopping.png"
+                    alt="logo"
+                    data-testid="logo"
+                />
             </div>
             <Toast toastList={toastList} setToastList={setToastList} />
             <form onSubmit={handleSignUp} className="auth-form">
@@ -83,6 +87,7 @@ const SignUpPage = (): ReactElement => {
                         type="text"
                         value={name}
                         onChange={(e) => setName(e.target.value)}
+                        data-testid="name"
                     />
                 </div>
                 <div className="auth-form-field">
@@ -92,6 +97,7 @@ const SignUpPage = (): ReactElement => {
                         type="text"
                         value={username}
                         onChange={(e) => setUsername(e.target.value)}
+                        data-testid="username"
                     />
                 </div>
                 <div className="auth-form-field">
@@ -101,21 +107,30 @@ const SignUpPage = (): ReactElement => {
                         type="password"
                         value={password}
                         onChange={(e) => setPassword(e.target.value)}
+                        data-testid="password"
                     />
                 </div>
-                <button type="submit" className="auth-btn">
+                <button
+                    type="submit"
+                    className="auth-btn"
+                    data-testid="sign-up-btn"
+                >
                     Sign Up
                 </button>
             </form>
             <div>
                 Already registered?{" "}
-                <Link to={"/login"} className="auth-link">
+                <Link
+                    to={"/login"}
+                    className="auth-link"
+                    data-testid="login-btn"
+                >
                     Log In!
                 </Link>
             </div>
             <div>
                 Lost?{" "}
-                <Link to={"/"} className="auth-link">
+                <Link to={"/"} className="auth-link" data-testid="homepage-btn">
                     Back Home!
                 </Link>
             </div>

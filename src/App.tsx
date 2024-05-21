@@ -1,9 +1,9 @@
-import { CartPage } from "./pages/CartPage"
-import { DetailsPage } from "./pages/DetailsPage"
+import { CartPage } from "./pages/CartPage/CartPage"
+import { DetailsPage } from "./pages/DetailsPage/DetailsPage"
 import { HomePage } from "./pages/HomePage/HomePage"
-import { LoginPage } from "./pages/LoginPage"
-import { NotFoundPage } from "./pages/NotFoundPage"
-import { SignUpPage } from "./pages/SignUpPage"
+import { LoginPage } from "./pages/LoginPage/LoginPage"
+import { NotFoundPage } from "./pages/NotFoundPage/NotFoundPage"
+import { SignUpPage } from "./pages/SignUpPage/SignUpPage"
 import { ReactElement, ReactNode } from "react"
 import {
     BrowserRouter as Router,

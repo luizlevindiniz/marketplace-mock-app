@@ -37,6 +37,7 @@ const LoginPage = (): ReactElement => {
             })
 
             const resBody = await res.json()
+
             if (!res.ok) {
                 const errorToast: ToastComponent = {
                     toastMessage: `${resBody.error}`,
@@ -76,7 +77,11 @@ const LoginPage = (): ReactElement => {
         <CenteredContainer>
             <div className="auth-page-header">
                 <h1>Login into</h1>{" "}
-                <img src="./src/assets/online-shopping.png" alt="logo" />
+                <img
+                    src="./src/assets/online-shopping.png"
+                    alt="logo"
+                    data-testid="logo"
+                />
             </div>
             <Toast toastList={toastList} setToastList={setToastList} />
             <form onSubmit={handleLogin} className="auth-form">
@@ -86,6 +91,7 @@ const LoginPage = (): ReactElement => {
                         id="username"
                         type="text"
                         value={username}
+                        data-testid="username"
                         onChange={(e) => setUsername(e.target.value)}
                     />
                 </div>
@@ -95,22 +101,31 @@ const LoginPage = (): ReactElement => {
                         id="password"
                         type="password"
                         value={password}
+                        data-testid="password"
                         onChange={(e) => setPassword(e.target.value)}
                     />
                 </div>
-                <button type="submit" className="auth-btn">
+                <button
+                    type="submit"
+                    className="auth-btn"
+                    data-testid="login-btn"
+                >
                     Login
                 </button>
             </form>
             <div>
                 Not registered?{" "}
-                <Link to={"/signup"} className="auth-link">
+                <Link
+                    to={"/signup"}
+                    className="auth-link"
+                    data-testid="sign-up-btn"
+                >
                     Sign Up!
                 </Link>
             </div>
             <div>
                 Lost?{" "}
-                <Link to={"/"} className="auth-link">
+                <Link to={"/"} className="auth-link" data-testid="homepage-btn">
                     Back Home!
                 </Link>
             </div>

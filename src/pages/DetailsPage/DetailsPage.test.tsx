@@ -1,6 +1,6 @@
 import { DetailsPage } from "./DetailsPage"
 import "@testing-library/jest-dom"
-import { act, render, screen } from "@testing-library/react"
+import { act, fireEvent, render, screen } from "@testing-library/react"
 import { ResetStyle } from "@/styles/global"
 import { ThemeProvider } from "styled-components"
 import { AxiosError, AxiosHeaders } from "axios"
@@ -123,6 +123,114 @@ describe("src/pages/DetailsPage", () => {
             expect(screen.getAllByText("Apple")[0]).toBeVisible()
             expect(screen.getAllByText("Add to Cart")[0]).toBeVisible()
             expect(screen.getAllByText("Leave a comment")[0]).toBeVisible()
+        })
+
+        test("back button is working", async () => {
+            await act(async () =>
+                render(
+                    <ThemeProvider theme={theme}>
+                        <ResetStyle />
+                        <Router>
+                            <Provider store={store}>
+                                <AuthProvider>
+                                    <DetailsPage />
+                                </AuthProvider>
+                            </Provider>
+                        </Router>
+                    </ThemeProvider>
+                )
+            )
+            const backBtn = await screen.findByTestId("back-btn")
+            fireEvent.click(backBtn)
+            expect(window.location.pathname).toBe("/")
+        })
+
+        test("carrousel can change image on click", async () => {
+            await act(async () =>
+                render(
+                    <ThemeProvider theme={theme}>
+                        <ResetStyle />
+                        <Router>
+                            <Provider store={store}>
+                                <AuthProvider>
+                                    <DetailsPage />
+                                </AuthProvider>
+                            </Provider>
+                        </Router>
+                    </ThemeProvider>
+                )
+            )
+            const nextBtn = await screen.findByTestId("next-btn")
+            const prevBtn = await screen.findByTestId("prev-btn")
+            const imageDisplay = await screen.findByTestId("img-carrousel")
+
+            expect(imageDisplay).toHaveAttribute(
+                "src",
+                "https://cdn.dummyjson.com/product-images/1/1.jpg"
+            )
+            act(() => {
+                fireEvent.click(nextBtn)
+            })
+            expect(imageDisplay).toHaveAttribute(
+                "src",
+                "https://cdn.dummyjson.com/product-images/1/2.jpg"
+            )
+            act(() => {
+                fireEvent.click(prevBtn)
+            })
+            expect(imageDisplay).toHaveAttribute(
+                "src",
+                "https://cdn.dummyjson.com/product-images/1/1.jpg"
+            )
+        })
+
+        test("function add to cart works properly", async () => {
+            await act(async () =>
+                render(
+                    <ThemeProvider theme={theme}>
+                        <ResetStyle />
+                        <Router>
+                            <Provider store={store}>
+                                <AuthProvider>
+                                    <DetailsPage />
+                                </AuthProvider>
+                            </Provider>
+                        </Router>
+                    </ThemeProvider>
+                )
+            )
+            const addToCartBtn = await screen.findByTestId("add-to-cart-btn")
+            act(() => {
+                fireEvent.click(addToCartBtn)
+            })
+            expect(
+                await screen.findByText("iPhone 9 added to cart!")
+            ).toBeVisible()
+        })
+
+        test("comment section is working accordingly", async () => {
+            await act(async () =>
+                render(
+                    <ThemeProvider theme={theme}>
+                        <ResetStyle />
+                        <Router>
+                            <Provider store={store}>
+                                <AuthProvider>
+                                    <DetailsPage />
+                                </AuthProvider>
+                            </Provider>
+                        </Router>
+                    </ThemeProvider>
+                )
+            )
+            const commentInput = (await screen.findByTestId(
+                "comment-input"
+            )) as HTMLInputElement
+            const commentSubmit = await screen.findByTestId("comment-submit")
+
+            fireEvent.change(commentInput, { target: { value: "test" } })
+            expect(commentInput.value).toBe("test")
+            fireEvent.click(commentSubmit)
         })
     })
 })

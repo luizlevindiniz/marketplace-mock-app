@@ -18,14 +18,21 @@ const product = {
     price: 23,
     brand: "Example Brand",
     rating: 4.5,
-    description:
-        "This is an example product description. Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+    description: "This is an example product description.",
 }
 const store = createStore(cartReducer)
 
+let title: HTMLElement
+let image: HTMLElement
+let price: HTMLElement
+let brand: HTMLElement
+let rating: HTMLElement
+let description: HTMLElement
+let shipping: HTMLElement
+
 describe("src/components/Card", () => {
     describe("when card is displayed", () => {
-        test("all properties are visible", async () => {
+        beforeEach(async () => {
             await act(async () => {
                 render(
                     <ThemeProvider theme={theme}>
@@ -49,25 +56,35 @@ describe("src/components/Card", () => {
                     </ThemeProvider>
                 )
             })
+
+            title = screen.getByTestId("product-title")
+            image = screen.getByTestId("card-image")
+            price = screen.getByTestId("product-price")
+            brand = screen.getByTestId("product-brand")
+            rating = screen.getByTestId("product-rating")
+            description = screen.getByTestId("product-description")
+            shipping = screen.getByTestId("product-shipping")
+        })
+
+        test("card is defined", () => {
             const card = screen.getByTestId("product-card")
             expect(card).toBeDefined()
-            const title = screen.getByTestId("product-title")
-            const image = screen.getByTestId("card-image")
-            const price = screen.getByTestId("product-price")
-            const brand = screen.getByTestId("product-brand")
-            const rating = screen.getByTestId("product-rating")
-            const description = screen.getByTestId("product-description")
-            const shipping = screen.getByTestId("product-shipping")
+        })
 
+        test("header properties are visible", async () => {
             expect(title.textContent).toBe("Example Product")
             expect(image).toHaveAttribute("src", "example.jpg")
             expect(image).toHaveAttribute("alt", "Example Image")
+        })
+        test("body properties are visible", async () => {
             expect(price.textContent).toBe("$23.00")
             expect(rating.tagName).toBe("P")
             expect(rating.children).toHaveLength(5)
             expect(brand.textContent).toBe("Example Brand")
+        })
+        test("footer properties are visible", () => {
             expect(description.textContent).toBe(
-                "This is an example product description. Lorem ipsum dolor sit amet, consectetur adipiscing elit."
+                "This is an example product description."
             )
             expect(shipping.textContent).toBe("$5.99 Shipping")
         })

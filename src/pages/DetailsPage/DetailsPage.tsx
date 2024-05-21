@@ -13,6 +13,7 @@ import { addToCart } from "@/reducers/cartReducer"
 import { CartProductObject } from "@/models/CartProduct"
 import Toast from "@/components/Toast"
 import { v4 } from "uuid"
+import { AxiosError } from "axios"
 
 type ToastType = "success" | "failure" | "warning"
 
@@ -27,13 +28,16 @@ const DetailsPage = (): ReactElement => {
     const dispatch = useDispatch()
 
     const [product, setProduct] = useState<ProductObject | null>(null)
+    const [skeletonMessage, setSkeletonMessage] = useState("Loading")
     const [slide, setSlide] = useState(0)
     const [toastList, setToastList] = useState<ToastComponent[]>([])
 
     const handleProduct = async (productId: string): Promise<void> => {
         const res = await getSingleProduct(productId)
 
-        if (res) {
+        if (res instanceof AxiosError) {
+            setSkeletonMessage(`Error ${res.response?.data.message}`)
+        } else {
             setProduct(res)
         }
     }
@@ -183,7 +187,7 @@ const DetailsPage = (): ReactElement => {
                         </div>
                     </Showcase>
                 ) : (
-                    <div>Loading</div>
+                    <div>{skeletonMessage}</div>
                 )}
             </main>
             <Footer />

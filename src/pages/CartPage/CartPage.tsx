@@ -1,13 +1,13 @@
 import { ReactElement, useEffect, useState } from "react"
-import { Navbar } from "components/Navbar"
-import { CartGrid } from "components/CartGrid"
-import { Footer } from "components/Footer"
-import { Headline } from "components/Headline"
-import { CartShowcase } from "components/CartShowcase"
-import { CartProductObject } from "models/CartProduct"
+import { Navbar } from "@/components/Navbar"
+import { CartGrid } from "@/components/CartGrid"
+import { Footer } from "@/components/Footer"
+import { Headline } from "@/components/Headline"
+import { CartShowcase } from "@/components/CartShowcase"
+import { CartProductObject } from "@/models/CartProduct"
 import { useSelector, useDispatch } from "react-redux"
-import { removeFromCart, addToCart } from "reducers/cartReducer"
-import { CheckoutForm } from "components/CheckoutForm"
+import { removeFromCart, addToCart } from "@/reducers/cartReducer"
+import { CheckoutForm } from "@/components/CheckoutForm"
 interface CartState {
     cart: CartProductObject[]
 }
@@ -54,21 +54,30 @@ const CartPage = (): ReactElement => {
                                     <div key={product.id} className="product">
                                         <div className="product-head">
                                             <div>
-                                                <h3 className="header">
+                                                <h3
+                                                    className="header"
+                                                    data-testid="product-brand"
+                                                >
                                                     {product.brand}
                                                 </h3>
-                                                <h1 className="title">
+                                                <h1
+                                                    className="title"
+                                                    data-testid="product-title"
+                                                >
                                                     {product.title}
                                                 </h1>
                                             </div>
-                                            <h2 className="price">
+                                            <h2
+                                                className="price"
+                                                data-testid="product-price"
+                                            >
                                                 ${product.price}.00
                                             </h2>
                                         </div>
 
                                         <div className="product-tail">
                                             <div className="more-menu">
-                                                <h2>
+                                                <h2 data-testid="product-qnt">
                                                     Qnt: {product.quantity}{" "}
                                                     unit(s)
                                                 </h2>
@@ -81,6 +90,7 @@ const CartPage = (): ReactElement => {
                                                                 product
                                                             )
                                                         }
+                                                        data-testid="remove-product-btn"
                                                     >
                                                         <i className="fa-solid fa-minus"></i>
                                                     </button>
@@ -92,6 +102,7 @@ const CartPage = (): ReactElement => {
                                                                 product
                                                             )
                                                         }
+                                                        data-testid="add-more-product-btn"
                                                     >
                                                         <i className="fa-solid fa-plus"></i>
                                                     </button>
@@ -108,10 +119,13 @@ const CartPage = (): ReactElement => {
                             </div>
                         )}
                     </CartShowcase>
-                    <div className="cart-checkout">
+                    <div
+                        className="cart-checkout"
+                        data-testid="cart-checkout-wrapper"
+                    >
                         <h2 className="total-price">
                             Total price:{" "}
-                            <span>
+                            <span data-testid="price-span">
                                 $
                                 {cart.reduce(function (acc, prod) {
                                     return acc + prod.price * prod.quantity
@@ -125,6 +139,7 @@ const CartPage = (): ReactElement => {
                                 type="button"
                                 className="cart-checkout-btn"
                                 onClick={() => setShowCheckout(!showCheckout)}
+                                data-testid="open-checkout-form-btn"
                             >
                                 Checkout
                             </button>

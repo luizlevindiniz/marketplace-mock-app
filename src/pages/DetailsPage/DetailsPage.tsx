@@ -1,18 +1,19 @@
 import { ReactElement, useEffect, useState } from "react"
-import { Navbar } from "components/Navbar"
-import { Footer } from "components/Footer"
-import { Headline } from "components/Headline"
+import { Navbar } from "@/components/Navbar"
+import { Footer } from "@/components/Footer"
+import { Headline } from "@/components/Headline"
 import { useParams } from "react-router"
-import { ProductObject } from "models/Product"
-import { getSingleProduct } from "services/products"
-import { Showcase } from "components/Showcase"
+import { ProductObject } from "@/models/Product"
+import { getSingleProduct } from "@/services/products"
+import { Showcase } from "@/components/Showcase"
 import { FaStar } from "react-icons/fa"
 import { Link } from "react-router-dom"
 import { useDispatch } from "react-redux"
-import { addToCart } from "reducers/cartReducer"
-import { CartProductObject } from "models/CartProduct"
-import Toast from "components/Toast"
+import { addToCart } from "@/reducers/cartReducer"
+import { CartProductObject } from "@/models/CartProduct"
+import Toast from "@/components/Toast"
 import { v4 } from "uuid"
+import { AxiosError } from "axios"
 
 type ToastType = "success" | "failure" | "warning"
 
@@ -27,13 +28,16 @@ const DetailsPage = (): ReactElement => {
     const dispatch = useDispatch()
 
     const [product, setProduct] = useState<ProductObject | null>(null)
+    const [skeletonMessage, setSkeletonMessage] = useState("Loading")
     const [slide, setSlide] = useState(0)
     const [toastList, setToastList] = useState<ToastComponent[]>([])
 
     const handleProduct = async (productId: string): Promise<void> => {
         const res = await getSingleProduct(productId)
 
-        if (res) {
+        if (res instanceof AxiosError) {
+            setSkeletonMessage(`Error ${res.response?.data.message}`)
+        } else {
             setProduct(res)
         }
     }
@@ -87,7 +91,11 @@ const DetailsPage = (): ReactElement => {
                     <Showcase className="product-detail" id="product-detail">
                         <div className="main">
                             <Link to={"/"} className="back-link">
-                                <button type="button" className="back-button">
+                                <button
+                                    type="button"
+                                    className="back-button"
+                                    data-testid="back-btn"
+                                >
                                     Back
                                 </button>
                             </Link>
@@ -121,6 +129,7 @@ const DetailsPage = (): ReactElement => {
                                             onClick={() =>
                                                 handleAddToCartClick(product)
                                             }
+                                            data-testid="add-to-cart-btn"
                                         >
                                             Add to Cart
                                         </button>
@@ -137,6 +146,7 @@ const DetailsPage = (): ReactElement => {
                                         onClick={() =>
                                             handleSlideChange("prev")
                                         }
+                                        data-testid="prev-btn"
                                     >
                                         <path
                                             strokeLinecap="round"
@@ -150,6 +160,7 @@ const DetailsPage = (): ReactElement => {
                                     className="slide-image"
                                     src={product.images[slide]}
                                     alt="product-slide"
+                                    data-testid="img-carrousel"
                                 />
                                 <div className="swiper-button swiper-next-button">
                                     <svg
@@ -160,6 +171,7 @@ const DetailsPage = (): ReactElement => {
                                         onClick={() =>
                                             handleSlideChange("next")
                                         }
+                                        data-testid="next-btn"
                                     >
                                         <path
                                             strokeLinecap="round"
@@ -175,15 +187,21 @@ const DetailsPage = (): ReactElement => {
                                 <textarea
                                     name="comment"
                                     id="comment"
+                                    data-testid="comment-input"
                                 ></textarea>
                                 <div className="submit-wrapper">
-                                    <button type="button">Submit</button>
+                                    <button
+                                        type="button"
+                                        data-testid="comment-submit"
+                                    >
+                                        Submit
+                                    </button>
                                 </div>
                             </div>
                         </div>
                     </Showcase>
                 ) : (
-                    <div>Loading</div>
+                    <div>{skeletonMessage}</div>
                 )}
             </main>
             <Footer />

@@ -19,7 +19,8 @@ const CheckoutForm = (): ReactElement => {
                             <input
                                 type="text"
                                 id="fname"
-                                name="firstname"
+                                name="fullname"
+                                data-testid="fullname"
                                 placeholder="John M. Doe"
                             />
                             <label htmlFor="email">
@@ -29,6 +30,7 @@ const CheckoutForm = (): ReactElement => {
                                 type="text"
                                 id="email"
                                 name="email"
+                                data-testid="email"
                                 placeholder="john@example.com"
                             />
                             <label htmlFor="adr">
@@ -38,6 +40,7 @@ const CheckoutForm = (): ReactElement => {
                                 type="text"
                                 id="adr"
                                 name="address"
+                                data-testid="address"
                                 placeholder="542 W. 15th Street"
                             />
                             <label htmlFor="city">
@@ -47,6 +50,7 @@ const CheckoutForm = (): ReactElement => {
                                 type="text"
                                 id="city"
                                 name="city"
+                                data-testid="city"
                                 placeholder="New York"
                             />
                             <div className="row">
@@ -56,6 +60,7 @@ const CheckoutForm = (): ReactElement => {
                                         type="text"
                                         id="state"
                                         name="state"
+                                        data-testid="state"
                                         placeholder="NY"
                                     />
                                 </div>
@@ -65,6 +70,7 @@ const CheckoutForm = (): ReactElement => {
                                         type="text"
                                         id="zip"
                                         name="zip"
+                                        data-testid="zip"
                                         placeholder="10001"
                                     />
                                 </div>
@@ -95,6 +101,7 @@ const CheckoutForm = (): ReactElement => {
                             <input
                                 type="text"
                                 id="cname"
+                                data-testid="cardname"
                                 name="cardname"
                                 placeholder="John More Doe"
                             />
@@ -103,6 +110,7 @@ const CheckoutForm = (): ReactElement => {
                                 type="text"
                                 id="ccnum"
                                 name="cardnumber"
+                                data-testid="cardnumber"
                                 placeholder="1111-2222-3333-4444"
                             />
                             <label htmlFor="expmonth">Exp Month</label>
@@ -110,6 +118,7 @@ const CheckoutForm = (): ReactElement => {
                                 type="text"
                                 id="expmonth"
                                 name="expmonth"
+                                data-testid="expmonth"
                                 placeholder="September"
                             />
                             <div className="row">
@@ -119,6 +128,7 @@ const CheckoutForm = (): ReactElement => {
                                         type="text"
                                         id="expyear"
                                         name="expyear"
+                                        data-testid="expyear"
                                         placeholder="2018"
                                     />
                                 </div>
@@ -128,6 +138,7 @@ const CheckoutForm = (): ReactElement => {
                                         type="text"
                                         id="cvv"
                                         name="cvv"
+                                        data-testid="cvv"
                                         placeholder="352"
                                     />
                                 </div>
@@ -140,7 +151,8 @@ const CheckoutForm = (): ReactElement => {
                             type="checkbox"
                             checked={checked}
                             onChange={() => setChecked(!checked)}
-                            name="sameadr"
+                            name="shipping"
+                            data-testid="shipping"
                         />
                         Shipping address same as billing
                     </div>
@@ -148,6 +160,7 @@ const CheckoutForm = (): ReactElement => {
                         type="submit"
                         value="Continue to checkout"
                         className="buy-btn"
+                        data-testid="buy-btn"
                     />
                 </form>
             </div>

@@ -7,7 +7,13 @@ interface Image {
 }
 
 const Image = ({ src, alt }: Image): ReactElement => {
-    return <Styled.Image src={src} alt={alt}></Styled.Image>
+    return (
+        <Styled.Image
+            src={src}
+            alt={alt}
+            data-testid="card-image"
+        ></Styled.Image>
+    )
 }
 
 export { Image }

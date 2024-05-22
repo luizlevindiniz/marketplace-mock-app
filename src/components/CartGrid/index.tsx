@@ -7,7 +7,11 @@ interface Grid {
 }
 
 const CartGrid = ({ className, children }: Grid): ReactElement => {
-    return <Styled.CartGrid className={className}>{children}</Styled.CartGrid>
+    return (
+        <Styled.CartGrid className={className} data-testid="cart-grid">
+            {children}
+        </Styled.CartGrid>
+    )
 }
 
 export { CartGrid }

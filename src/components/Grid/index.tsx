@@ -7,7 +7,11 @@ interface Grid {
 }
 
 const Grid = ({ className, children }: Grid): ReactElement => {
-    return <Styled.Grid className={className}>{children}</Styled.Grid>
+    return (
+        <Styled.Grid className={className} data-testid="grid">
+            {children}
+        </Styled.Grid>
+    )
 }
 
 export { Grid }

@@ -1,4 +1,4 @@
-import { CartProductObject } from "models/CartProduct"
+import { CartProductObject } from "@/models/CartProduct"
 import { UnknownAction } from "redux"
 interface Action {
     type: string

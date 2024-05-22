@@ -1,7 +1,7 @@
 import { ChangeEvent, ReactElement, useEffect, useState } from "react"
 import * as Styled from "./styles"
 import { Link } from "react-router-dom"
-import { useAuth } from "auth/useAuth"
+import { useAuth } from "@/auth/useAuth"
 interface Props {
     search?: string
     handleSearchChange?: (e: ChangeEvent<HTMLInputElement>) => void
@@ -28,7 +28,7 @@ const Navbar = ({
     }
 
     return (
-        <Styled.PageHeader>
+        <Styled.PageHeader data-testid="navbar">
             <Styled.NavbarContent className="navbar-content">
                 <Styled.NavbarHeader className="navbar-head">
                     <Link to="/">
@@ -44,6 +44,7 @@ const Navbar = ({
                             type="text"
                             className="search-bar-input"
                             placeholder="Search"
+                            data-testid="search-bar-input"
                             value={search}
                             onChange={handleSearchChange}
                         />
@@ -73,7 +74,10 @@ const Navbar = ({
                         </li>
                         <li>
                             <Link to="/cart" className="nav-link">
-                                <i className="fa-solid fa-cart-shopping"></i>
+                                <i
+                                    className="fa-solid fa-cart-shopping"
+                                    data-testid="fa-cart-shopping"
+                                ></i>
                             </Link>
                         </li>
                         <li>
@@ -82,11 +86,16 @@ const Navbar = ({
                                     onClick={handleLogout}
                                     id="logged-in-btn"
                                     className="nav-link"
+                                    data-testid="logout-btn"
                                 >
                                     <i className="fa-solid fa-right-from-bracket"></i>
                                 </button>
                             ) : (
-                                <Link to="/login" className="nav-link">
+                                <Link
+                                    to="/login"
+                                    className="nav-link"
+                                    data-testid="logged-in-btn"
+                                >
                                     <i className="fa-solid fa-user"></i>
                                 </Link>
                             )}

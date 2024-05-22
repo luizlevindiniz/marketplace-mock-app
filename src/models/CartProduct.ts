@@ -9,6 +9,6 @@ export interface CartProductObject {
     brand: string
     category: string
     thumbnail: string
-    images: [string]
+    images: string[]
     quantity: number
 }

@@ -1,34 +1,36 @@
-import { useAuth } from "auth/useAuth"
-import { ReactElement, FormEvent, useState } from "react"
-import { CenteredContainer } from "components/CenteredContainer"
+import { ReactElement, useState, FormEvent } from "react"
+import { CenteredContainer } from "@/components/CenteredContainer"
 import { Link, useNavigate } from "react-router-dom"
-import Toast from "components/Toast"
 import { v4 } from "uuid"
-
+import Toast from "@/components/Toast"
 type ToastType = "success" | "failure" | "warning"
+
 interface ToastComponent {
     toastMessage: string
     toastType: ToastType
     id: string
 }
-const LoginPage = (): ReactElement => {
+
+const SignUpPage = (): ReactElement => {
+    const [name, setName] = useState<string>("")
     const [username, setUsername] = useState<string>("")
     const [password, setPassword] = useState<string>("")
     const [toastList, setToastList] = useState<ToastComponent[]>([])
-
-    const auth = useAuth()
     const navigate = useNavigate()
-    const handleLogin = async (
+
+    const handleSignUp = async (
         e: FormEvent<HTMLFormElement>
     ): Promise<void> => {
         e.preventDefault()
+
         try {
             const payload = {
+                name,
                 username,
                 password,
             }
 
-            const res = await fetch("http://localhost:8080/auth/login", {
+            const res = await fetch("http://localhost:8080/auth/signup", {
                 body: JSON.stringify(payload),
                 headers: {
                     "Content-Type": "application/json",
@@ -44,29 +46,23 @@ const LoginPage = (): ReactElement => {
                     id: v4(),
                 }
                 setToastList(toastList.concat(errorToast))
-
                 return
             }
-
-            const { token } = resBody
-            if (!token) {
-                throw new Error("Server Error! Token missing!")
-            }
-
-            await auth.login(token)
             const successToast: ToastComponent = {
-                toastMessage: `Signed In! Redirecting to home.`,
+                toastMessage: "User registered! Redirecting to login.",
                 toastType: "success",
                 id: v4(),
             }
             setToastList(toastList.concat(successToast))
+
             setTimeout(() => {
-                navigate("/")
+                navigate("/login")
             }, 3000)
         } catch (err) {
             console.log(err)
             throw new Error("Error while signing up!")
         } finally {
+            setName("")
             setPassword("")
             setUsername("")
         }
@@ -75,11 +71,25 @@ const LoginPage = (): ReactElement => {
     return (
         <CenteredContainer>
             <div className="auth-page-header">
-                <h1>Login into</h1>{" "}
-                <img src="./src/assets/online-shopping.png" alt="logo" />
+                <h1>Welcome to</h1>{" "}
+                <img
+                    src="./src/assets/online-shopping.png"
+                    alt="logo"
+                    data-testid="logo"
+                />
             </div>
             <Toast toastList={toastList} setToastList={setToastList} />
-            <form onSubmit={handleLogin} className="auth-form">
+            <form onSubmit={handleSignUp} className="auth-form">
+                <div className="auth-form-field">
+                    <label htmlFor="name">Full Name: </label>
+                    <input
+                        id="name"
+                        type="text"
+                        value={name}
+                        onChange={(e) => setName(e.target.value)}
+                        data-testid="name"
+                    />
+                </div>
                 <div className="auth-form-field">
                     <label htmlFor="username">Username: </label>
                     <input
@@ -87,6 +97,7 @@ const LoginPage = (): ReactElement => {
                         type="text"
                         value={username}
                         onChange={(e) => setUsername(e.target.value)}
+                        data-testid="username"
                     />
                 </div>
                 <div className="auth-form-field">
@@ -96,25 +107,34 @@ const LoginPage = (): ReactElement => {
                         type="password"
                         value={password}
                         onChange={(e) => setPassword(e.target.value)}
+                        data-testid="password"
                     />
                 </div>
-                <button type="submit" className="auth-btn">
-                    Login
+                <button
+                    type="submit"
+                    className="auth-btn"
+                    data-testid="sign-up-btn"
+                >
+                    Sign Up
                 </button>
             </form>
             <div>
-                Not registered?{" "}
-                <Link to={"/signup"} className="auth-link">
-                    Sign Up!
+                Already registered?{" "}
+                <Link
+                    to={"/login"}
+                    className="auth-link"
+                    data-testid="login-btn"
+                >
+                    Log In!
                 </Link>
             </div>
             <div>
                 Lost?{" "}
-                <Link to={"/"} className="auth-link">
+                <Link to={"/"} className="auth-link" data-testid="homepage-btn">
                     Back Home!
                 </Link>
             </div>
         </CenteredContainer>
     )
 }
-export { LoginPage }
+export { SignUpPage }

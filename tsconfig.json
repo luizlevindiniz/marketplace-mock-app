@@ -22,15 +22,18 @@
 
         "baseUrl": ".",
         "paths": {
-            "*": ["./src/*"]
+            "@/*": ["./src/*"]
         }
     },
     "include": [
         "src",
         "src/**/*.ts",
         "src/**/*.tsx",
+        "src/**/*.test.ts",
+        "src/**/*.test.tsx",
         "./.eslintrc.*",
-        "./vite.config.ts"
+        "./vite.config.ts",
+        "setupTests.ts"
     ],
     "references": [{ "path": "./tsconfig.node.json" }]
 }

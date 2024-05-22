@@ -1,6 +1,6 @@
 import { ReactElement } from "react"
 import * as Styled from "./styles"
-import { Image } from "components/Image"
+import { Image } from "@/components/Image"
 import { Link } from "react-router-dom"
 import { FaStar } from "react-icons/fa"
 
@@ -28,18 +28,24 @@ const Card = ({
     const starArray = Array(5).fill(0)
 
     return (
-        <Styled.Wrapper className="product-card">
+        <Styled.Wrapper className="product-card" data-testid="product-card">
             <div className="product-image-wrapper">
                 <Link className="product-image" to={`/product/${id}`}>
                     <Image src={image} alt={imageAlt}></Image>
                 </Link>
             </div>
             <Styled.WrapperBody className="product-body-wrapper">
-                <Link className="product-title" to={`/product/${id}`}>
+                <Link
+                    className="product-title"
+                    to={`/product/${id}`}
+                    data-testid="product-title"
+                >
                     {title}
                 </Link>
-                <h5 className="product-brand">{brand}</h5>
-                <p className="product-star-rating">
+                <h5 className="product-brand" data-testid="product-brand">
+                    {brand}
+                </h5>
+                <p className="product-star-rating" data-testid="product-rating">
                     {starArray.map((_, index) => (
                         <FaStar
                             size={20}
@@ -48,11 +54,16 @@ const Card = ({
                         ></FaStar>
                     ))}
                 </p>
-                <p className="product-price">
+                <p className="product-price" data-testid="product-price">
                     $<span>{price}.00</span>
                 </p>
-                <p className="product-summary">{description}</p>
-                <p className="product-shipping">
+                <p
+                    className="product-summary"
+                    data-testid="product-description"
+                >
+                    {description}
+                </p>
+                <p className="product-shipping" data-testid="product-shipping">
                     {price % 3 === 0 ? (
                         <span> Free Shipping </span>
                     ) : (
